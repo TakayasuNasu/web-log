@@ -1,0 +1,10 @@
+[data-sidebar] {
+  display: none;
+}
+@container layout (min-width: 880px) {
+  [data-sidebar] {
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

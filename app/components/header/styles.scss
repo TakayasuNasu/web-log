@@ -1,0 +1,31 @@
+[data-header] {
+  padding-block: 12px;
+  ul.mobile {
+    display: flex;
+    margin-inline: block;
+    width: min(90%, 612px);
+    
+    @container layout (min-width: 680px) {
+      display: none;
+    }
+
+    li.face {
+      overflow: hidden;
+      width: min(10.8vw, 46px);
+      border-radius: 50%;;
+      img {
+        aspect-ratio: 1/1;
+      }
+    }
+  }
+
+  ul.desktop {
+    display: none;
+
+    @container layout (min-width: 680px) {
+      display: flex;
+      align-items: center;
+      column-gap: 24px;
+    }
+  }
+}

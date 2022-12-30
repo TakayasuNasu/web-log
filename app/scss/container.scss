@@ -1,0 +1,19 @@
+[data-container] {
+  container: layout / inline-size;
+  margin-block: 12px;
+  margin-inline: auto;
+  width: min(90%, 1240px);
+
+  @media (min-width: 766px) {
+    display: grid;
+    grid-template-columns: auto minmax(10%, 600px);
+    justify-content: start;
+    column-gap: 20px;
+  }
+
+  @media (min-width: 960px) {
+    grid-template-columns: auto 600px minmax(10%, 380px);
+    column-gap: 40px;
+  }
+
+}

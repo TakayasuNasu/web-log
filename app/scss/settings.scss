@@ -1,0 +1,15 @@
+html {
+  --text-colour: #112D4E;
+  --link-colour: #3F72AF;
+  --background-colour: #F9F7F7;
+  --sub-bg-colour: #DBE2EF;
+  --border-colour: #3F72AF;
+}
+
+html.dark {
+  --text-colour: #DAE1E7;
+  --link-colour: #00909E;
+  --background-colour: #142850;
+  --sub-bg-colour: #27496D;
+  --border-colour: #00909E;
+}

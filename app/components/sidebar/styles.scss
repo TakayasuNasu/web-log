@@ -1,0 +1,7 @@
+[data-sidebar] {
+  display: none;
+
+  @container layout (min-width: 880px) {
+    display: block;
+  }
+}
