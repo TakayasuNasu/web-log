@@ -3,7 +3,7 @@
     display: none;
 
     @container layout (min-width: 680px) {
-      display: block;
+      display: grid;
       width: 80px;
     }
 
@@ -20,8 +20,21 @@
     }
   }
 
-  a.text-link {
+  li {
     display: flex;
+    column-gap: 20px;
+    padding-block: 12px;
+    font-size: var(--font-size-medium);
+    cursor: pointer;
+
+    &.home {
+      font-weight: 700;
+    }
+
+    &:hover {
+      opacity: 0.8;
+      transition: 0.4s;
+    }
   }
 }
 

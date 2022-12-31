@@ -1,4 +1,5 @@
 import { json } from "@remix-run/node"
+import { useLoaderData } from "@remix-run/react"
 import { Theme, useTheme } from "~/utils/theme-provider"
 import { client } from "~/models/contentful.server"
 
@@ -24,17 +25,11 @@ export function links() {
 export async function loader() {
   const siteMasta = await client.getSiteMasta()
   console.log(siteMasta)
+  const {
+    collection: { hashtags },
+  } = await client.getHashtagBy()
   return json({
-    posts: [
-      {
-        slug: "my-first-post",
-        title: "My First Post",
-      },
-      {
-        slug: "90s-mixtape",
-        title: "A Mixtape I Made Just For You",
-      },
-    ],
+    hashtags: hashtags,
   })
 }
 
@@ -46,12 +41,16 @@ export default function Index() {
     )
   }
 
+  const { hashtags } = useLoaderData<typeof loader>()
+
   return (
     <>
       <div data-container>
-        <Nav />
+        <Nav {...{ hashtags }} />
+
         <main>
           <Header />
+
           <ul className="statuses">
             <li>
               <Status />
@@ -63,12 +62,14 @@ export default function Index() {
               <Status />
             </li>
           </ul>
+
           <ul>
             <li>
               <button onClick={toggleTheme}>Toggle</button>
             </li>
           </ul>
         </main>
+
         <Sidebar />
       </div>
       <MobileNav />

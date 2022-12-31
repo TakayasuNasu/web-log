@@ -3,7 +3,7 @@
 }
 @container layout (min-width: 680px) {
   [data-main-nav] ul {
-    display: block;
+    display: grid;
     width: 80px;
   }
 }
@@ -20,8 +20,19 @@
     display: block;
   }
 }
-[data-main-nav] a.text-link {
+[data-main-nav] li {
   display: flex;
+  column-gap: 20px;
+  padding-block: 12px;
+  font-size: var(--font-size-medium);
+  cursor: pointer;
+}
+[data-main-nav] li.home {
+  font-weight: 700;
+}
+[data-main-nav] li:hover {
+  opacity: 0.8;
+  transition: 0.4s;
 }
 
 [data-mobile-nav-layer] {
