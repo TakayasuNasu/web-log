@@ -6,6 +6,7 @@ import { client } from "~/models/contentful.server"
 import Header, { links as headerLinks } from "~/components/header"
 import Nav, { MobileNav, links as navLinks } from "~/components/nav"
 import Sidebar, { links as sidebarLinks } from "~/components/sidebar"
+import Status, { links as statusLinks } from "~/components/status"
 
 // style
 import styles from "~/styles/style.css"
@@ -15,6 +16,7 @@ export function links() {
     ...headerLinks(),
     ...navLinks(),
     ...sidebarLinks(),
+    ...statusLinks(),
     { rel: "stylesheet", href: styles },
   ]
 }
@@ -50,7 +52,17 @@ export default function Index() {
         <Nav />
         <main>
           <Header />
-          <h1>Welcome to Remix!!!</h1>
+          <ul className="statuses">
+            <li>
+              <Status />
+            </li>
+            <li>
+              <Status />
+            </li>
+            <li>
+              <Status />
+            </li>
+          </ul>
           <ul>
             <li>
               <button onClick={toggleTheme}>Toggle</button>

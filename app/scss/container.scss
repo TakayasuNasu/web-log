@@ -16,4 +16,10 @@
     column-gap: 40px;
   }
 
+  ul.statuses {
+    > li {
+      border-top: 1px solid var(--border-colour);
+    }
+  }
+
 }

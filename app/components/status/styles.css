@@ -1,0 +1,49 @@
+[data-status] {
+  overflow: hidden;
+  padding-block: 16px;
+  padding-inline: 8px;
+}
+[data-status] article {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 12px;
+}
+[data-status] figure {
+  flex-shrink: 0;
+  overflow: hidden;
+  width: min(10.8vw, 46px);
+  border-radius: 50%;
+}
+[data-status] figure img {
+  aspect-ratio: 1/1;
+}
+
+[data-status-body] {
+  min-width: 0;
+}
+[data-status-body] header ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
+  column-gap: 12px;
+}
+[data-status-body] header p {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--font-size-small);
+  text-overflow: ellipsis;
+}
+[data-status-body] li.name {
+  font-weight: 700;
+}
+[data-status-body] li.email, [data-status-body] li.date {
+  color: #72767a;
+}
+[data-status-body] > main > * {
+  margin-top: 10px;
+}
+[data-status-body] > main > p {
+  font-size: var(--font-size-small);
+  line-height: 1.25;
+}
+
+/*# sourceMappingURL=styles.css.map */

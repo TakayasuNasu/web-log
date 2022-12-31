@@ -4,6 +4,17 @@ html {
   --background-colour: #F9F7F7;
   --sub-bg-colour: #DBE2EF;
   --border-colour: #3F72AF;
+  --font-size-small: clamp(10px, 16 / 426 * 100vw, 16px);
+}
+@media (min-width: 766px) {
+  html {
+    --font-size-small: clamp(12px, 16 / 1344 * 100vw, 16px);
+  }
+}
+@media (min-width: 1344px) {
+  html {
+    --font-size-small: 16px;
+  }
 }
 
 html.dark {
@@ -137,6 +148,9 @@ button {
     grid-template-columns: auto 600px minmax(10%, 380px);
     column-gap: 40px;
   }
+}
+[data-container] ul.statuses > li {
+  border-top: 1px solid var(--border-colour);
 }
 
 /*# sourceMappingURL=style.css.map */

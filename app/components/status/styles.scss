@@ -1,0 +1,58 @@
+[data-status] {
+  overflow: hidden;
+  padding-block: 16px;
+  padding-inline: 8px;
+
+  article {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 12px;
+  }
+
+  figure {
+    flex-shrink: 0;
+    overflow: hidden;
+    width: min(10.8vw, 46px);
+    border-radius: 50%;
+    img {
+      aspect-ratio: 1/1;
+    }
+  }
+}
+
+[data-status-body] {
+  min-width: 0;
+
+  header {
+    ul {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
+      column-gap: 12px;
+    }
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      font-size: var(--font-size-small);
+      text-overflow: ellipsis;
+    }
+  }
+
+  li.name {
+    font-weight: 700;
+  }
+
+  li.email, li.date {
+    color: #72767a;
+  }
+
+  > main {
+    > * {
+      margin-top: 10px;
+    }
+
+    > p {
+      font-size: var(--font-size-small);
+      line-height: 1.25;
+    }
+  }
+}
