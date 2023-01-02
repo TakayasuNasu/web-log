@@ -65,7 +65,6 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
           <div className="text">Home</div>
         </li>
         {hashtags.map((tag, i) => {
-          console.log(tag.iconType)
           return (
             <li key={i}>
               <div className="icon">{navIcon(tag.iconType)}</div>

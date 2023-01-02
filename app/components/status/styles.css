@@ -17,31 +17,35 @@
 [data-status] figure img {
   aspect-ratio: 1/1;
 }
-
-[data-status-body] {
+[data-status] div.body {
   min-width: 0;
 }
-[data-status-body] header ul {
+[data-status] div.body header ul {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
   column-gap: 12px;
 }
-[data-status-body] header p {
+[data-status] div.body header p {
   overflow: hidden;
   white-space: nowrap;
   font-size: var(--font-size-small);
   text-overflow: ellipsis;
 }
-[data-status-body] li.name {
+[data-status] div.body header li.name {
   font-weight: 700;
 }
-[data-status-body] li.email, [data-status-body] li.date {
+[data-status] div.body header li.email, [data-status] div.body header li.date {
   color: #72767a;
 }
-[data-status-body] > main > * {
+
+[data-status-body] > * {
   margin-top: 10px;
 }
-[data-status-body] > main > p {
+[data-status-body] h1, [data-status-body] h2, [data-status-body] h3,
+[data-status-body] h4, [data-status-body] h5, [data-status-body] h6 {
+  font-size: var(--font-size-medium);
+}
+[data-status-body] > p {
   font-size: var(--font-size-small);
   line-height: 1.25;
 }

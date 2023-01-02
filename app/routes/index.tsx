@@ -2,6 +2,7 @@ import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { Theme, useTheme } from "~/utils/theme-provider"
 import { client } from "~/models/contentful.server"
+import type { Post } from "~/models/contentful.server"
 
 // components
 import Header, { links as headerLinks } from "~/components/header"
@@ -28,8 +29,10 @@ export async function loader() {
   const {
     collection: { hashtags },
   } = await client.getHashtagBy()
+
   return json({
     hashtags: hashtags,
+    posts: await client.getPosts(),
   })
 }
 
@@ -41,7 +44,7 @@ export default function Index() {
     )
   }
 
-  const { hashtags } = useLoaderData<typeof loader>()
+  const { hashtags, posts } = useLoaderData<typeof loader>()
 
   return (
     <>
@@ -52,15 +55,13 @@ export default function Index() {
           <Header />
 
           <ul className="statuses">
-            <li>
-              <Status />
-            </li>
-            <li>
-              <Status />
-            </li>
-            <li>
-              <Status />
-            </li>
+            {posts?.map((post: Post, i) => {
+              return (
+                <li key={i}>
+                  <Status {...post} />
+                </li>
+              )
+            })}
           </ul>
 
           <ul>

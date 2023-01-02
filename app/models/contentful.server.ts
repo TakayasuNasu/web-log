@@ -90,4 +90,64 @@ async function getHashtagBy(slug: string = "left-nav") {
   )
 }
 
-export const client = { getSiteMasta, getHashtagBy }
+export type Post = {
+  sys: {
+    publishedAt: string
+  }
+  name: string
+  slug: string
+  excerpt: string
+  bodyCopy: string
+  collection: {
+    hashtags: Array<Hashtag>
+  }
+}
+
+type PostsResponse = {
+  data: {
+    postCollection: {
+      items: Array<Post>
+    }
+  }
+  errors?: Array<{ message: string }>
+}
+
+export async function getPosts() {
+  const query = `
+  {
+    postCollection {
+      items {
+        sys {
+          publishedAt
+        }
+        name
+        slug
+        excerpt
+        bodyCopy
+        collection: hashtagsCollection {
+          hashtags: items {
+            name
+            slug
+            iconType
+          }
+        }
+      }
+    }
+  }
+  `
+
+  const response = await apiCall(query)
+
+  const { data, errors } = (await response.json()) as PostsResponse
+
+  if (!response.ok) {
+    const error = new Error(
+      errors?.map((e) => e.message).join("\n") ?? "unknown"
+    )
+    return Promise.reject(error)
+  }
+
+  return await data?.postCollection.items
+}
+
+export const client = { getSiteMasta, getHashtagBy, getPosts }
