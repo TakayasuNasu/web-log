@@ -3,8 +3,8 @@
 }
 [data-header] ul.mobile {
   display: flex;
+  justify-content: space-between;
   margin-inline: block;
-  width: min(90%, 612px);
 }
 @container layout (min-width: 680px) {
   [data-header] ul.mobile {
@@ -28,6 +28,57 @@
     align-items: center;
     column-gap: 24px;
   }
+}
+[data-header] input[type=checkbox] {
+  display: none;
+}
+[data-header] input[type=checkbox]:checked + label {
+  background-color: var(--sub-bg-colour);
+}
+[data-header] input[type=checkbox]:checked + label:before {
+  left: -100%;
+}
+[data-header] input[type=checkbox]:checked + label:after {
+  left: 0;
+}
+[data-header] input[type=checkbox]:checked + label:active:after {
+  left: 10%;
+}
+[data-header] label {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  width: 4em;
+  height: 2em;
+  transform: skew(-10deg) translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background-color: var(--sub-bg-colour);
+}
+[data-header] label:after, [data-header] label:before {
+  display: inline-block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  line-height: 2em;
+  color: var(--text-colour);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  text-align: center;
+  transform: skew(10deg);
+  transition: all 0.2s ease;
+}
+[data-header] label:before {
+  left: 0;
+  content: attr(data-label-off);
+}
+[data-header] label:after {
+  left: 100%;
+  content: attr(data-label-on);
+}
+[data-header] label:active:before {
+  left: -10%;
 }
 
 /*# sourceMappingURL=styles.css.map */

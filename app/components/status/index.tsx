@@ -44,6 +44,7 @@ const Status: FC<Post> = ({
                     day: "2-digit",
                     month: "short",
                     year: "numeric",
+                    timeZone: "America/Los_Angeles",
                   })}
                 </p>
               </li>

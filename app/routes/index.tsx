@@ -1,6 +1,5 @@
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
-import { Theme, useTheme } from "~/utils/theme-provider"
 import { client } from "~/models/contentful.server"
 import type { Post } from "~/models/contentful.server"
 
@@ -37,13 +36,6 @@ export async function loader() {
 }
 
 export default function Index() {
-  const [, setTheme] = useTheme()
-  const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT
-    )
-  }
-
   const { hashtags, posts } = useLoaderData<typeof loader>()
 
   return (
@@ -62,12 +54,6 @@ export default function Index() {
                 </li>
               )
             })}
-          </ul>
-
-          <ul>
-            <li>
-              <button onClick={toggleTheme}>Toggle</button>
-            </li>
           </ul>
         </main>
 

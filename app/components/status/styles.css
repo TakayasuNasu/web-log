@@ -18,6 +18,7 @@
   aspect-ratio: 1/1;
 }
 [data-status] div.body {
+  width: 100%;
   min-width: 0;
 }
 [data-status] div.body header ul {
@@ -45,9 +46,26 @@
 [data-status-body] h4, [data-status-body] h5, [data-status-body] h6 {
   font-size: var(--font-size-medium);
 }
-[data-status-body] > p {
+[data-status-body] > p, [data-status-body] > ul,
+[data-status-body] > ol, [data-status-body] > code,
+[data-status-body] > blockquote {
   font-size: var(--font-size-small);
+  font-weight: 500;
+}
+[data-status-body] > p {
   line-height: 1.25;
+}
+[data-status-body] > ul {
+  list-style-type: disc;
+}
+[data-status-body] > ul, [data-status-body] > ol {
+  padding-left: 1.5ch;
+  line-height: 1.5;
+}
+[data-status-body] > blockquote {
+  padding: 12px;
+  border-radius: 4px;
+  background-color: var(--sub-bg-colour);
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -20,6 +20,7 @@
   }
 
   div.body {
+    width: 100%;
     min-width: 0;
 
     header {
@@ -56,8 +57,29 @@
     font-size: var(--font-size-medium);
   }
 
-  > p {
+  > p, > ul,
+  > ol, > code,
+  > blockquote {
     font-size: var(--font-size-small);
+    font-weight: 500;
+  }
+
+  > p {
     line-height: 1.25;
+  }
+
+  > ul {
+    list-style-type: disc;
+  }
+  
+  > ul, > ol {
+    padding-left: 1.5ch;
+    line-height: 1.5;
+  }
+
+  > blockquote {
+    padding: 12px;
+    border-radius: 4px;
+    background-color: var(--sub-bg-colour);
   }
 }
