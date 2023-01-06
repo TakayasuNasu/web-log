@@ -1,7 +1,7 @@
 [data-status] {
   overflow: hidden;
   padding-block: 16px;
-  padding-inline: 8px;
+  padding-inline: 12px;
 
   article {
     display: flex;
@@ -61,7 +61,6 @@
   > ol, > code,
   > blockquote {
     font-size: var(--font-size-small);
-    font-weight: 500;
   }
 
   > p {

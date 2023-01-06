@@ -62,13 +62,17 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
           <div className="icon">
             <AiOutlineHome />
           </div>
-          <div className="text">Home</div>
+          <div className="text">
+            <p>Home</p>
+          </div>
         </li>
         {hashtags.map((tag, i) => {
           return (
             <li key={i}>
               <div className="icon">{navIcon(tag.iconType)}</div>
-              <div className="text">{tag.name}</div>
+              <div className="text">
+                <p>{tag.name}</p>
+              </div>
             </li>
           )
         })}
@@ -77,7 +81,7 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
   )
 }
 
-export const MobileNav: FC = (): JSX.Element => {
+export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
   const {
     state: { expanded },
     close,
@@ -93,8 +97,38 @@ export const MobileNav: FC = (): JSX.Element => {
       ></div>
 
       <nav data-mobile-nav data-active={expanded}>
-        <ul>
-          <li></li>
+        <header>
+          <p>About</p>
+        </header>
+
+        <ul className="about">
+          <li>
+            <p>Tak</p>
+          </li>
+          <li>
+            <p>taka.beckham@gmail.com</p>
+          </li>
+        </ul>
+
+        <ul className="nav-list">
+          <li className="home">
+            <div className="icon">
+              <AiOutlineHome />
+            </div>
+            <div className="text">
+              <p>Home</p>
+            </div>
+          </li>
+          {hashtags.map((tag, i) => {
+            return (
+              <li key={i}>
+                <div className="icon">{navIcon(tag.iconType)}</div>
+                <div className="text">
+                  <p>{tag.name}</p>
+                </div>
+              </li>
+            )
+          })}
         </ul>
       </nav>
     </>

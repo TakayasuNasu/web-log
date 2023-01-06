@@ -59,7 +59,7 @@ export default function Index() {
 
         <Sidebar />
       </div>
-      <MobileNav />
+      <MobileNav {...{ hashtags }} />
     </>
   )
 }

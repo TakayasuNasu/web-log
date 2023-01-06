@@ -1,7 +1,7 @@
 [data-status] {
   overflow: hidden;
   padding-block: 16px;
-  padding-inline: 8px;
+  padding-inline: 12px;
 }
 [data-status] article {
   display: flex;
@@ -50,7 +50,6 @@
 [data-status-body] > ol, [data-status-body] > code,
 [data-status-body] > blockquote {
   font-size: var(--font-size-small);
-  font-weight: 500;
 }
 [data-status-body] > p {
   line-height: 1.25;
