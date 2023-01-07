@@ -3,6 +3,7 @@ html {
   --link-colour: #3F72AF;
   --background-colour: #F9F7F7;
   --sub-bg-colour: #DBE2EF;
+  --gradation-bg: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
   --border-colour: #3F72AF;
   --font-size-small: clamp(10px, 16 / 426 * 100vw, 16px);
   --font-size-medium: clamp(18px, 22 / 426 * 100vw, 22px);
@@ -23,5 +24,6 @@ html.dark {
   --link-colour: #00909E;
   --background-colour: #142850;
   --sub-bg-colour: #27496D;
+  --gradation-bg: linear-gradient(25deg, #004e92, #000428);
   --border-colour: #00909E;
 }
