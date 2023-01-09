@@ -9,16 +9,18 @@
     "sass": "sass --watch app/scss/style.scss:app/styles/style.css app/components/:app/components/"
   },
   "dependencies": {
-    "@netlify/functions": "^1.3.0",
+    "@netlify/functions": "^1.4.0",
     "@remix-run/netlify": "^1.9.0",
     "@remix-run/node": "^1.9.0",
     "@remix-run/react": "^1.9.0",
     "cross-env": "^7.0.3",
     "highlight.js": "^11.7.0",
     "marked": "^4.2.5",
+    "open-graph-scraper": "^5.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.7.1",
+    "remix-utils": "^5.2.1"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.9.0",
@@ -28,8 +30,8 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "concurrently": "^7.6.0",
-    "eslint": "^8.27.0",
-    "prettier": "^2.8.1",
+    "eslint": "^8.31.0",
+    "prettier": "^2.8.2",
     "sass": "^1.57.1",
     "typescript": "^4.8.4"
   },
