@@ -8,15 +8,4 @@ export async function getOgpData(url: string) {
   }
 
   return data.result
-
-  // return await ogp({ url: url, onlyGetOpenGraphInfo: true })
-  //   .then((data) => {
-  //     if (!data.result.success) {
-  //       return
-  //     }
-  //     return data.result
-  //   })
-  //   .catch((error) => {
-  //     throw error
-  //   })
 }

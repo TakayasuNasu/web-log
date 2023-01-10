@@ -1,7 +1,12 @@
+import { useFetcher } from "@remix-run/react"
+import { useState, useEffect } from "react"
+import { renderToString } from "react-dom/server"
 import type { FC } from "react"
 import { marked } from "marked"
 import hljs from "highlight.js"
 import type { Post } from "~/models/contentful.server"
+import { action as openGraphAction } from "~/routes/action/open-graph"
+import { successResultObject, errorResultObject } from "open-graph-scraper"
 
 // assets
 import face from "~/images/face.png"
@@ -65,6 +70,14 @@ const Status: FC<Post> = ({
 export default Status
 
 const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
+  const fetcher = useFetcher<typeof openGraphAction>()
+
+  const [html, setHtml] = useState("")
+  const [ogpUrl, setOgpUrl] = useState("")
+  const [ogpComponent, setOgpComponent] = useState(
+    "<p style='{display: none}'></p>"
+  )
+
   marked.setOptions({
     langPrefix: "hljs language-",
     highlight: function (code) {
@@ -77,7 +90,65 @@ const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
     },
   })
 
-  const html = marked(bodyCopy)
+  const renderer = new marked.Renderer()
+
+  renderer.link = (href, title, text) => {
+    if (!href || !text) {
+      return ``
+    }
+    setOgpUrl(href)
+    if (title === null) {
+      return renderToString(
+        <a href={href} target="_blank">
+          {text}
+        </a>
+      )
+    }
+    return ogpComponent
+  }
+
+  marked.use({ renderer })
+
+  useEffect(() => {
+    setHtml(marked(bodyCopy))
+  }, [ogpComponent])
+
+  useEffect(() => {
+    if (ogpUrl) {
+      fetcher.submit(
+        { url: ogpUrl },
+        { action: "/action/open-graph", method: "post" }
+      )
+    }
+  }, [ogpUrl])
+
+  useEffect(() => {
+    if (!fetcher.data) return
+    const result: successResultObject | errorResultObject =
+      fetcher.data.openGraphData
+    if (result.success) {
+      const { ogTitle, ogDescription } = result
+      setOgpComponent(
+        renderToString(
+          <OgpComponent {...{ title: ogTitle, description: ogDescription }} />
+        )
+      )
+    }
+  }, [fetcher.data])
 
   return <main data-status-body dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+const OgpComponent: FC<{ title?: string; description?: string }> = ({
+  title,
+  description,
+}): JSX.Element => {
+  return (
+    <a href="" data-ogp>
+      <figure></figure>
+      <div>
+        <p>{title}</p>
+      </div>
+    </a>
+  )
 }
