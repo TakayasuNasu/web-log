@@ -6,7 +6,11 @@ import { marked } from "marked"
 import hljs from "highlight.js"
 import type { Post } from "~/models/contentful.server"
 import { action as openGraphAction } from "~/routes/action/open-graph"
-import { successResultObject, errorResultObject } from "open-graph-scraper"
+import {
+  successResultObject,
+  errorResultObject,
+  imageObject,
+} from "open-graph-scraper"
 
 // assets
 import face from "~/images/face.png"
@@ -31,7 +35,7 @@ const Status: FC<Post> = ({
   return (
     <div data-status>
       <article>
-        <figure>
+        <figure className="face">
           <img src={face} alt="face photo" />
         </figure>
         <div className="body">
@@ -68,6 +72,14 @@ const Status: FC<Post> = ({
 }
 
 export default Status
+
+export type OpenGrapData = {
+  ogTitle?: string
+  ogType?: string
+  ogUrl?: string
+  ogDescription?: string
+  ogImage?: string | imageObject | imageObject[] | undefined
+}
 
 const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
   const fetcher = useFetcher<typeof openGraphAction>()
@@ -127,10 +139,10 @@ const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
     const result: successResultObject | errorResultObject =
       fetcher.data.openGraphData
     if (result.success) {
-      const { ogTitle, ogDescription } = result
+      const { ogTitle, ogDescription, ogUrl, ogImage } = result
       setOgpComponent(
         renderToString(
-          <OgpComponent {...{ title: ogTitle, description: ogDescription }} />
+          <OgpComponent {...{ ogTitle, ogDescription, ogUrl, ogImage }} />
         )
       )
     }
@@ -139,16 +151,35 @@ const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
   return <main data-status-body dangerouslySetInnerHTML={{ __html: html }} />
 }
 
-const OgpComponent: FC<{ title?: string; description?: string }> = ({
-  title,
-  description,
+const OgpComponent: FC<OpenGrapData> = ({
+  ogTitle,
+  ogDescription,
+  ogImage,
+  ogUrl,
 }): JSX.Element => {
+  if (!ogUrl || !ogImage) {
+    return <div style={{ display: "none" }}></div>
+  }
+
+  const domain = ogUrl.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)
+
   return (
-    <a href="" data-ogp>
-      <figure></figure>
-      <div>
-        <p>{title}</p>
-      </div>
-    </a>
+    <div data-ogp-link>
+      <a href={ogUrl} target="_blank">
+        {typeof ogImage !== "string" && !Array.isArray(ogImage) && (
+          <figure className="og-image">
+            <img src={ogImage?.url} alt="test" />
+          </figure>
+        )}
+
+        <div className="og-text">
+          <aside>
+            <span>{domain && domain.length > 0 && domain[1]}</span>
+          </aside>
+          <h2>{ogTitle}</h2>
+          <p>{ogDescription}</p>
+        </div>
+      </a>
+    </div>
   )
 }

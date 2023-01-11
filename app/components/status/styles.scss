@@ -9,7 +9,7 @@
     column-gap: 12px;
   }
 
-  figure {
+  figure.face {
     flex-shrink: 0;
     overflow: hidden;
     width: min(10.8vw, 46px);
@@ -80,5 +80,28 @@
     padding: 12px;
     border-radius: 4px;
     background-color: var(--sub-bg-colour);
+  }
+}
+
+[data-ogp-link] {
+  overflow: hidden;
+  border: solid 1px var(--sub-bg-colour);
+  border-radius: 16px;
+
+  a {
+    text-decoration: unset;
+  }
+
+  div.og-text {
+    padding: 12px;
+    color: var(--text-colour);
+  }
+
+  h2 {
+    padding-block: 8px;
+  }
+
+  aside, p {
+    color: #72767a;
   }
 }

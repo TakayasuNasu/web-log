@@ -8,13 +8,13 @@
   align-items: flex-start;
   column-gap: 12px;
 }
-[data-status] figure {
+[data-status] figure.face {
   flex-shrink: 0;
   overflow: hidden;
   width: min(10.8vw, 46px);
   border-radius: 50%;
 }
-[data-status] figure img {
+[data-status] figure.face img {
   aspect-ratio: 1/1;
 }
 [data-status] div.body {
@@ -65,6 +65,25 @@
   padding: 12px;
   border-radius: 4px;
   background-color: var(--sub-bg-colour);
+}
+
+[data-ogp-link] {
+  overflow: hidden;
+  border: solid 1px var(--sub-bg-colour);
+  border-radius: 16px;
+}
+[data-ogp-link] a {
+  text-decoration: unset;
+}
+[data-ogp-link] div.og-text {
+  padding: 12px;
+  color: var(--text-colour);
+}
+[data-ogp-link] h2 {
+  padding-block: 8px;
+}
+[data-ogp-link] aside, [data-ogp-link] p {
+  color: #72767a;
 }
 
 /*# sourceMappingURL=styles.css.map */
