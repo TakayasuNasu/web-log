@@ -1,6 +1,9 @@
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { client } from "~/models/contentful.server"
+import { getPostWithOgpData } from "~/models/open-graph.server"
+
+// type
 import type { Post } from "~/models/contentful.server"
 
 // components
@@ -29,9 +32,11 @@ export async function loader() {
     collection: { hashtags },
   } = await client.getHashtagBy()
 
+  const posts = await client.getPosts()
+
   return json({
     hashtags: hashtags,
-    posts: await client.getPosts(),
+    posts: await getPostWithOgpData(posts),
   })
 }
 

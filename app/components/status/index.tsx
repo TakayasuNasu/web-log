@@ -1,16 +1,10 @@
-import { useFetcher } from "@remix-run/react"
-import { useState, useEffect } from "react"
 import { renderToString } from "react-dom/server"
 import type { FC } from "react"
 import { marked } from "marked"
 import hljs from "highlight.js"
-import type { Post } from "~/models/contentful.server"
-import { action as openGraphAction } from "~/routes/action/open-graph"
-import {
-  successResultObject,
-  errorResultObject,
-  imageObject,
-} from "open-graph-scraper"
+
+// type
+import type { PostWithOgp, Ogp } from "~/models/open-graph.server"
 
 // assets
 import face from "~/images/face.png"
@@ -24,12 +18,13 @@ export const links = () => [
   { rel: "stylesheet", href: styles },
 ]
 
-const Status: FC<Post> = ({
+const Status: FC<PostWithOgp> = ({
   sys: { publishedAt },
   name,
   excerpt,
   bodyCopy,
   collection,
+  ogp,
 }): JSX.Element => {
   const date = new Date(publishedAt)
   return (
@@ -59,7 +54,7 @@ const Status: FC<Post> = ({
               </li>
             </ul>
           </header>
-          <Body {...{ bodyCopy }} />
+          <Body {...{ bodyCopy, ogp }} />
           <footer>
             <ul>
               <li></li>
@@ -73,23 +68,10 @@ const Status: FC<Post> = ({
 
 export default Status
 
-export type OpenGrapData = {
-  ogTitle?: string
-  ogType?: string
-  ogUrl?: string
-  ogDescription?: string
-  ogImage?: string | imageObject | imageObject[] | undefined
-}
-
-const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
-  const fetcher = useFetcher<typeof openGraphAction>()
-
-  const [html, setHtml] = useState("")
-  const [ogpUrl, setOgpUrl] = useState("")
-  const [ogpComponent, setOgpComponent] = useState(
-    "<p style='{display: none}'></p>"
-  )
-
+const Body: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
+  bodyCopy,
+  ogp,
+}): JSX.Element => {
   marked.setOptions({
     langPrefix: "hljs language-",
     highlight: function (code) {
@@ -105,10 +87,9 @@ const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
   const renderer = new marked.Renderer()
 
   renderer.link = (href, title, text) => {
-    if (!href || !text) {
+    if (!href || !text || !ogp) {
       return ``
     }
-    setOgpUrl(href)
     if (title === null) {
       return renderToString(
         <a href={href} target="_blank">
@@ -116,42 +97,17 @@ const Body: FC<{ bodyCopy: string }> = ({ bodyCopy }): JSX.Element => {
         </a>
       )
     }
-    return ogpComponent
+    return renderToString(<OgpComponent {...ogp} />)
   }
 
   marked.use({ renderer })
 
-  useEffect(() => {
-    setHtml(marked(bodyCopy))
-  }, [ogpComponent])
-
-  useEffect(() => {
-    if (ogpUrl) {
-      fetcher.submit(
-        { url: ogpUrl },
-        { action: "/action/open-graph", method: "post" }
-      )
-    }
-  }, [ogpUrl])
-
-  useEffect(() => {
-    if (!fetcher.data) return
-    const result: successResultObject | errorResultObject =
-      fetcher.data.openGraphData
-    if (result.success) {
-      const { ogTitle, ogDescription, ogUrl, ogImage } = result
-      setOgpComponent(
-        renderToString(
-          <OgpComponent {...{ ogTitle, ogDescription, ogUrl, ogImage }} />
-        )
-      )
-    }
-  }, [fetcher.data])
+  const html = marked(bodyCopy)
 
   return <main data-status-body dangerouslySetInnerHTML={{ __html: html }} />
 }
 
-const OgpComponent: FC<OpenGrapData> = ({
+const OgpComponent: FC<Ogp> = ({
   ogTitle,
   ogDescription,
   ogImage,
@@ -166,7 +122,7 @@ const OgpComponent: FC<OpenGrapData> = ({
   return (
     <div data-ogp-link>
       <a href={ogUrl} target="_blank">
-        {typeof ogImage !== "string" && !Array.isArray(ogImage) && (
+        {ogImage && (
           <figure className="og-image">
             <img src={ogImage?.url} alt="test" />
           </figure>
