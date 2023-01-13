@@ -1,4 +1,7 @@
 import type { FC } from "react"
+import { useNavigate } from "@remix-run/react"
+
+// icons
 import { AiOutlineHome, AiOutlineLaptop } from "react-icons/ai"
 import { CgDisc } from "react-icons/cg"
 import { GrGatsbyjs } from "react-icons/gr"
@@ -7,6 +10,8 @@ import { FaReact } from "react-icons/fa"
 import { MdOutlineMapsHomeWork } from "react-icons/md"
 import { SiTypescript } from "react-icons/si"
 import { RiEnglishInput } from "react-icons/ri"
+
+// types
 import type { Hashtag } from "~/models/contentful.server"
 
 // context
@@ -55,10 +60,11 @@ const Nav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
 export default Nav
 
 const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
+  const navigate = useNavigate()
   return (
     <nav data-main-nav>
       <ul className="nav-list">
-        <li className="home">
+        <li className="home" onClick={() => navigate("/")}>
           <div className="icon">
             <AiOutlineHome />
           </div>
@@ -68,7 +74,7 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
         </li>
         {hashtags.map((tag, i) => {
           return (
-            <li key={i}>
+            <li key={i} onClick={() => navigate(`/?tag=${tag.slug}`)}>
               <div className="icon">{navIcon(tag.iconType)}</div>
               <div className="text">
                 <p>{tag.name}</p>
@@ -82,6 +88,13 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
 }
 
 export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
+  const navigate = useNavigate()
+
+  const navigateAsClose = (to: string) => {
+    navigate(to)
+    close()
+  }
+
   const {
     state: { expanded },
     close,
@@ -111,7 +124,7 @@ export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
         </ul>
 
         <ul className="nav-list">
-          <li className="home">
+          <li className="home" onClick={() => navigateAsClose("/")}>
             <div className="icon">
               <AiOutlineHome />
             </div>
@@ -121,7 +134,7 @@ export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
           </li>
           {hashtags.map((tag, i) => {
             return (
-              <li key={i}>
+              <li key={i} onClick={() => navigateAsClose(`/?tag=${tag.slug}`)}>
                 <div className="icon">{navIcon(tag.iconType)}</div>
                 <div className="text">
                   <p>{tag.name}</p>
