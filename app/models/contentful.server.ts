@@ -112,7 +112,7 @@ type PostsResponse = {
   errors?: Array<{ message: string }>
 }
 
-export async function getPosts() {
+export async function getPosts(slug: string | null) {
   const query = `
   {
     postCollection {
@@ -147,7 +147,13 @@ export async function getPosts() {
     return Promise.reject(error)
   }
 
-  return await data?.postCollection.items
+  if (slug) {
+    return data?.postCollection.items.filter((post) => {
+      return post.collection.hashtags.some((tag) => tag.slug == slug)
+    })
+  }
+
+  return data?.postCollection.items
 }
 
 export const client = { getSiteMasta, getHashtagBy, getPosts }

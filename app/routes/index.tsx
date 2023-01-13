@@ -1,3 +1,4 @@
+import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { client } from "~/models/contentful.server"
@@ -25,14 +26,17 @@ export function links() {
   ]
 }
 
-export async function loader() {
+export async function loader({ request }: LoaderArgs) {
+  const url = new URL(request.url)
+  const tag = url.searchParams.get("tag")
+  console.log({ tag })
   const siteMasta = await client.getSiteMasta()
   console.log(siteMasta)
   const {
     collection: { hashtags },
   } = await client.getHashtagBy()
 
-  const posts = await client.getPosts()
+  const posts = await client.getPosts(tag)
 
   return json({
     hashtags: hashtags,
