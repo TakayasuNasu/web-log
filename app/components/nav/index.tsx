@@ -13,6 +13,7 @@ import { RiEnglishInput } from "react-icons/ri"
 
 // types
 import type { Hashtag } from "~/models/contentful.server"
+import type { MastaData } from "~/models/contentful.server"
 
 // context
 import { useAppContext } from "~/context/store"
@@ -24,6 +25,7 @@ export const links = () => [{ rel: "stylesheet", href: styles }]
 
 type ComponentProps = {
   hashtags: Array<Hashtag>
+  masta?: Partial<MastaData>
 }
 
 function navIcon(tag: string) {
@@ -49,10 +51,10 @@ function navIcon(tag: string) {
   }
 }
 
-const Nav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
+const Nav: FC<ComponentProps> = ({ masta, hashtags }): JSX.Element => {
   return (
     <>
-      <MainNav {...{ hashtags }} />
+      <MainNav {...{ masta, hashtags }} />
     </>
   )
 }
@@ -87,7 +89,10 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
   )
 }
 
-export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
+export const MobileNav: FC<ComponentProps> = ({
+  masta,
+  hashtags,
+}): JSX.Element => {
   const navigate = useNavigate()
 
   const navigateAsClose = (to: string) => {
@@ -116,10 +121,10 @@ export const MobileNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
 
         <ul className="about">
           <li>
-            <p>Tak</p>
+            <p>{masta?.nickname}</p>
           </li>
           <li>
-            <p>taka.beckham@gmail.com</p>
+            <p>{masta?.email}</p>
           </li>
         </ul>
 

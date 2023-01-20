@@ -16,6 +16,34 @@ async function apiCall(query: string) {
   return await fetch(fetchUrl, options)
 }
 
+export type MastaData = {
+  domain: string
+  email: string
+  address: string
+  introduction: string
+  country: string
+  nationality: string
+  nickname: string
+  description: string
+}
+
+export type Masta = {
+  key: string
+  value: string
+}
+
+export type SiteMasta = {
+  data?: {
+    siteMastaCollection: {
+      items: Array<{
+        name: string
+        data: Array<Masta>
+      }>
+    }
+  }
+  errors?: Array<{ message: string }>
+}
+
 async function getSiteMasta() {
   const query = `
   {
@@ -29,7 +57,36 @@ async function getSiteMasta() {
   `
 
   const response = await apiCall(query)
-  return await response.json()
+
+  const { data, errors } = (await response.json()) as SiteMasta
+
+  if (!response.ok) {
+    const error = new Error(
+      errors?.map((e) => e.message).join("\n") ?? "unknown"
+    )
+    return Promise.reject(error)
+  }
+
+  if (data && data.siteMastaCollection.items.length < 1) {
+    throw new Error("SiteMasta is not found.")
+  }
+
+  console.log(data?.siteMastaCollection.items[0].data[0].key)
+
+  const masta = {} as Partial<MastaData>
+
+  data?.siteMastaCollection.items[0].data.forEach((data) => {
+    if (data.key == "domain") masta.domain = data.value
+    if (data.key == "email") masta.email = data.value
+    if (data.key == "address") masta.address = data.value
+    if (data.key == "introduction") masta.introduction = data.value
+    if (data.key == "country") masta.country = data.value
+    if (data.key == "nationality") masta.nationality = data.value
+    if (data.key == "nickname") masta.nickname = data.value
+    if (data.key == "description") masta.description = data.value
+  })
+
+  return masta as MastaData
 }
 
 export type Hashtag = {

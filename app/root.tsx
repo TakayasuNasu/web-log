@@ -28,21 +28,27 @@ import styles from "~/styles/style.css"
 
 export const loader = async ({ request }: LoaderArgs) => {
   const themeSession = await getThemeSession(request)
+
   const {
     collection: { hashtags },
   } = await client.getHashtagBy()
 
   return json({
+    masta: await client.getSiteMasta(),
     hashtags: hashtags,
     theme: themeSession.getTheme(),
   })
 }
 
-export const meta: MetaFunction = () => ({
-  charset: "utf-8",
-  title: "Web Log i-nasu.com by Tak",
-  viewport: "width=device-width,initial-scale=1",
-})
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const { masta } = data
+  return {
+    charset: "utf-8",
+    title: "History of Takayasu Nasu | weblog.i-nasu.com",
+    description: masta.description,
+    viewport: "width=device-width,initial-scale=1",
+  }
+}
 
 export function links() {
   return [
@@ -55,7 +61,7 @@ export function links() {
 
 function App() {
   const data = useLoaderData<typeof loader>()
-  const { hashtags } = data
+  const { masta, hashtags } = data
   const [theme] = useTheme()
 
   return (
@@ -67,7 +73,7 @@ function App() {
       </head>
       <body>
         <div data-container>
-          <Nav {...{ hashtags }} />
+          <Nav {...{ masta, hashtags }} />
 
           <main>
             <Header />
@@ -75,7 +81,7 @@ function App() {
           </main>
           <Sidebar />
         </div>
-        <MobileNav {...{ hashtags }} />
+        <MobileNav {...{ masta, hashtags }} />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
