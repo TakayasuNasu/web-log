@@ -1,5 +1,6 @@
 import { renderToString } from "react-dom/server"
 import type { FC } from "react"
+import { Link } from "@remix-run/react"
 import { marked } from "marked"
 import hljs from "highlight.js"
 
@@ -30,9 +31,11 @@ const Status: FC<PostWithOgp> = ({
   return (
     <div data-status>
       <article>
-        <figure className="face">
-          <img src={face} alt="face photo" />
-        </figure>
+        <Link to="/taka7beckham">
+          <figure className="face">
+            <img src={face} alt="face photo" />
+          </figure>
+        </Link>
         <div className="body">
           <header>
             <ul>
