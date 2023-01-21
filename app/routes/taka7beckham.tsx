@@ -48,7 +48,7 @@ export default function About() {
             </li>
             <li>
               <AiOutlineLink />{" "}
-              <a href="https:www.i-nasu.com">{masta.domain}</a>
+              <a href={`https://${masta.domain}`}>{masta.domain}</a>
             </li>
           </ul>
         </aside>
