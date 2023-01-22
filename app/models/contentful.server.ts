@@ -71,8 +71,6 @@ async function getSiteMasta() {
     throw new Error("SiteMasta is not found.")
   }
 
-  console.log(data?.siteMastaCollection.items[0].data[0].key)
-
   const masta = {} as Partial<MastaData>
 
   data?.siteMastaCollection.items[0].data.forEach((data) => {
@@ -158,6 +156,7 @@ export type Post = {
   collection: {
     hashtags: Array<Hashtag>
   }
+  reply?: Post
 }
 
 type PostsResponse = {
@@ -187,6 +186,12 @@ export async function getPosts(slug: string | null) {
             slug
             iconType
           }
+        }
+        reply {
+          sys {
+            publishedAt
+          }
+          bodyCopy
         }
       }
     }

@@ -161,9 +161,6 @@ button {
     border-right: 1px solid var(--sub-bg-colour);
   }
 }
-[data-container] ul.statuses > li {
-  border-top: 1px solid var(--border-colour);
-}
 
 section[data-about] figure.hero {
   margin-inline: calc(50% - 50vw);
@@ -212,6 +209,11 @@ section[data-about] ul.list > li {
   display: flex;
   align-items: center;
   column-gap: 4px;
+}
+
+ul[data-statuses] > li {
+  overflow: hidden;
+  border-top: 1px solid var(--border-colour);
 }
 
 /*# sourceMappingURL=style.css.map */

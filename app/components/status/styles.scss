@@ -45,6 +45,20 @@
       }
     }
   }
+  &[data-has-reply='true'] {
+    position: relative;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 20px;
+      left: min(8.2vw, 34px);
+      width: 2px;
+      height: 100%;
+      background-color: var(--border-colour);
+    }
+  }
 }
 
 [data-status-body] {

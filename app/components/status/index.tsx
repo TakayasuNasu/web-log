@@ -21,15 +21,13 @@ export const links = () => [
 
 const Status: FC<PostWithOgp> = ({
   sys: { publishedAt },
-  name,
-  excerpt,
   bodyCopy,
-  collection,
+  reply,
   ogp,
 }): JSX.Element => {
   const date = new Date(publishedAt)
   return (
-    <div data-status>
+    <div data-status data-has-reply={reply ? true : false}>
       <article>
         <Link to="/taka7beckham">
           <figure className="face">

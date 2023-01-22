@@ -38,6 +38,19 @@
 [data-status] div.body header li.email, [data-status] div.body header li.date {
   color: #72767a;
 }
+[data-status][data-has-reply=true] {
+  position: relative;
+}
+[data-status][data-has-reply=true]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: min(8.2vw, 34px);
+  width: 2px;
+  height: 100%;
+  background-color: var(--border-colour);
+}
 
 [data-status-body] > * {
   margin-top: 10px;

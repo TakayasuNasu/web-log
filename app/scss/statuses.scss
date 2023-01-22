@@ -1,0 +1,6 @@
+ul[data-statuses] {
+  > li {
+    overflow: hidden;
+    border-top: 1px solid var(--border-colour);
+  }
+}

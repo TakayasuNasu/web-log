@@ -29,11 +29,12 @@ export default function Index() {
 
   return (
     <>
-      <ul className="statuses">
+      <ul className="statuses" data-statuses>
         {posts?.map((post: Post, i) => {
           return (
             <li key={i}>
               <Status {...post} />
+              {post.reply && <Status {...post.reply} />}
             </li>
           )
         })}
