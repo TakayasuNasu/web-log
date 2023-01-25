@@ -1,9 +1,5 @@
 import ogp from "open-graph-scraper"
-import {
-  successResultObject,
-  errorResultObject,
-  imageObject,
-} from "open-graph-scraper"
+import { imageObject } from "open-graph-scraper"
 import type { Post } from "./contentful.server"
 
 export type Ogp = {

@@ -1,6 +1,7 @@
 import { renderToString } from "react-dom/server"
 import type { FC } from "react"
 import { Link } from "@remix-run/react"
+import { useNavigate } from "@remix-run/react"
 import { marked } from "marked"
 import hljs from "highlight.js"
 
@@ -21,11 +22,13 @@ export const links = () => [
 
 const Status: FC<PostWithOgp> = ({
   sys: { publishedAt },
+  slug,
   bodyCopy,
   reply,
   ogp,
 }): JSX.Element => {
   const date = new Date(publishedAt)
+
   return (
     <div data-status data-has-reply={reply ? true : false}>
       <article>
@@ -55,7 +58,7 @@ const Status: FC<PostWithOgp> = ({
               </li>
             </ul>
           </header>
-          <Body {...{ bodyCopy, ogp }} />
+          <Body {...{ slug, bodyCopy, ogp }} />
           <footer>
             <ul>
               <li></li>
@@ -69,10 +72,17 @@ const Status: FC<PostWithOgp> = ({
 
 export default Status
 
-const Body: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
+const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
+  slug,
   bodyCopy,
   ogp,
 }): JSX.Element => {
+  const navigate = useNavigate()
+
+  const handleClick = (to: string) => {
+    navigate(`/taka7beckham/${to}`)
+  }
+
   marked.setOptions({
     langPrefix: "hljs language-",
     highlight: function (code) {
@@ -105,7 +115,13 @@ const Body: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
 
   const html = marked(bodyCopy)
 
-  return <main data-status-body dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <main
+      data-status-body
+      dangerouslySetInnerHTML={{ __html: html }}
+      onClick={() => handleClick(slug)}
+    />
+  )
 }
 
 const OgpComponent: FC<Ogp> = ({
@@ -121,7 +137,7 @@ const OgpComponent: FC<Ogp> = ({
   const domain = ogUrl.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)
 
   return (
-    <div data-ogp-link>
+    <div data-ogp-link onClick={(e) => e.stopPropagation()}>
       <a href={ogUrl} target="_blank">
         {ogImage && (
           <figure className="og-image">

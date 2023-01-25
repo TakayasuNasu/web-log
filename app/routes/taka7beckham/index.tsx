@@ -1,4 +1,3 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
@@ -13,7 +12,7 @@ import { client } from "~/models/contentful.server"
 import about from "~/images/bg-about.jpg"
 import face from "~/images/face.png"
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async () => {
   return json({
     masta: await client.getSiteMasta(),
   })

@@ -52,6 +52,9 @@
   background-color: var(--border-colour);
 }
 
+[data-status-body] {
+  cursor: pointer;
+}
 [data-status-body] > * {
   margin-top: 10px;
 }
@@ -82,6 +85,8 @@
 
 [data-ogp-link] {
   overflow: hidden;
+  position: relative;
+  z-index: 1;
   border: solid 1px var(--sub-bg-colour);
   border-radius: 16px;
 }

@@ -168,7 +168,7 @@ type PostsResponse = {
   errors?: Array<{ message: string }>
 }
 
-export async function getPosts(slug: string | null) {
+export async function getPosts(slug?: string | null) {
   const query = `
   {
     postCollection {
@@ -191,6 +191,7 @@ export async function getPosts(slug: string | null) {
           sys {
             publishedAt
           }
+          slug
           bodyCopy
         }
       }
