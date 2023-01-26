@@ -7,15 +7,18 @@ html {
   --border-colour: #3F72AF;
   --font-size-small: clamp(10px, 16 / 426 * 100vw, 16px);
   --font-size-medium: clamp(18px, 22 / 426 * 100vw, 22px);
+  --font-size-large: clamp(24px, 28 / 426 * 100vw, 28px);
 
   @media (min-width: 766px) {
     --font-size-small: clamp(12px, 16 / 1344 * 100vw, 16px);
     --font-size-medium: clamp(20px, 24 / 1344 * 100vw, 24px);
+    --font-size-large: clamp(26px, 34 / 426 * 100vw, 34px);
   }
 
   @media (min-width: 1344px) {
     --font-size-small: 16px;
-    --font-size-medium: clamp(20px, 25 / 1920 * 100vw, 25px);
+    --font-size-medium: clamp(22px, 25 / 1920 * 100vw, 26px);
+    --font-size-large: clamp(32px, 42 / 426 * 100vw, 42px);
   }
 }
 

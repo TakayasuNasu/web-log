@@ -1,0 +1,24 @@
+[data-single] {
+  padding-block: 12px;
+  padding-inline: 16px;
+
+  [data-single-body] {
+    > * {
+      margin-top: 42px;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-size: var(--font-size-large);
+    }
+
+    > p, > ul,
+    > ol, > code,
+    > blockquote {
+      font-size: var(--font-size-medium);
+    }
+
+    > p {
+      line-height: 1.6;
+    }
+  }
+}

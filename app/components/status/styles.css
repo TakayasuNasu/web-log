@@ -86,7 +86,6 @@
 [data-ogp-link] {
   overflow: hidden;
   position: relative;
-  z-index: 1;
   border: solid 1px var(--sub-bg-colour);
   border-radius: 16px;
 }

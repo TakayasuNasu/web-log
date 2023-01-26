@@ -4,21 +4,25 @@ import { useLoaderData } from "@remix-run/react"
 
 // models
 import { client } from "~/models/contentful.server"
+import { getPostWithOgpData } from "~/models/open-graph.server"
 
 // type
 import type { Post } from "~/models/contentful.server"
 
 // components
-import Status, { links as statusLinks } from "~/components/status"
+import { links as statusLinks } from "~/components/status"
+import { SingleBody } from "~/components/status"
 
 export function links() {
   return [...statusLinks()]
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const post = await (
-    await client.getPosts()
-  ).find((post) => post.slug == params.slug)
+  const posts = await client.getPosts()
+
+  const post = (await getPostWithOgpData(posts)).find(
+    (post) => post.slug == params.slug
+  )
 
   if (!post) {
     throw new Response("Not Found", { status: 404 })
@@ -27,12 +31,13 @@ export const loader = async ({ params }: LoaderArgs) => {
 }
 
 export default function PostSlug() {
-  const { post } = useLoaderData<typeof loader>()
+  const {
+    post: { bodyCopy, ogp, reply },
+  } = useLoaderData<typeof loader>()
   return (
-    <main className="mx-auto max-w-4xl">
-      <h1 className="my-6 border-b-2 text-center text-3xl">
-        Some Post: {post?.slug}
-      </h1>
-    </main>
+    <article data-single data-has-reply={reply ? true : false}>
+      <header></header>
+      <SingleBody {...{ bodyCopy, ogp }} />
+    </article>
   )
 }

@@ -72,6 +72,11 @@ const Status: FC<PostWithOgp> = ({
 
 export default Status
 
+function highlight(code: string) {
+  return hljs.highlightAuto(code, ["html", "javascript", "typescript", "bash"])
+    .value
+}
+
 const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
   slug,
   bodyCopy,
@@ -79,20 +84,18 @@ const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
 }): JSX.Element => {
   const navigate = useNavigate()
 
-  const handleClick = (to: string) => {
-    navigate(`/taka7beckham/${to}`)
+  const handleClick = (
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
+    to: string
+  ) => {
+    if ("localName" in e.target && e.target.localName != "img") {
+      navigate(`/taka7beckham/${to}`)
+    }
   }
 
   marked.setOptions({
     langPrefix: "hljs language-",
-    highlight: function (code) {
-      return hljs.highlightAuto(code, [
-        "html",
-        "javascript",
-        "typescript",
-        "bash",
-      ]).value
-    },
+    highlight: highlight,
   })
 
   const renderer = new marked.Renderer()
@@ -119,9 +122,41 @@ const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
     <main
       data-status-body
       dangerouslySetInnerHTML={{ __html: html }}
-      onClick={() => handleClick(slug)}
+      onClick={(e) => handleClick(e, slug)}
     />
   )
+}
+
+export const SingleBody: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
+  bodyCopy,
+  ogp,
+}): JSX.Element => {
+  marked.setOptions({
+    langPrefix: "hljs language-",
+    highlight: highlight,
+  })
+
+  const renderer = new marked.Renderer()
+
+  renderer.link = (href, title, text) => {
+    if (!href || !text || !ogp) {
+      return ``
+    }
+    if (title === null) {
+      return renderToString(
+        <a href={href} target="_blank">
+          {text}
+        </a>
+      )
+    }
+    return renderToString(<OgpComponent {...ogp} />)
+  }
+
+  marked.use({ renderer })
+
+  const html = marked(bodyCopy)
+
+  return <main data-single-body dangerouslySetInnerHTML={{ __html: html }} />
 }
 
 const OgpComponent: FC<Ogp> = ({
@@ -137,7 +172,7 @@ const OgpComponent: FC<Ogp> = ({
   const domain = ogUrl.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)
 
   return (
-    <div data-ogp-link onClick={(e) => e.stopPropagation()}>
+    <div data-ogp-link>
       <a href={ogUrl} target="_blank">
         {ogImage && (
           <figure className="og-image">
