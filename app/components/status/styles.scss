@@ -99,6 +99,26 @@
   }
 }
 
+[data-single-body] {
+  > * {
+    margin-top: 42px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: var(--font-size-large);
+  }
+
+  > p, > ul,
+  > ol, > code,
+  > blockquote {
+    font-size: var(--font-size-medium);
+  }
+
+  > p {
+    line-height: 1.6;
+  }
+}
+
 [data-ogp-link] {
   overflow: hidden;
   position: relative;

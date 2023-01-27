@@ -83,6 +83,21 @@
   background-color: var(--sub-bg-colour);
 }
 
+[data-single-body] > * {
+  margin-top: 42px;
+}
+[data-single-body] h1, [data-single-body] h2, [data-single-body] h3, [data-single-body] h4, [data-single-body] h5, [data-single-body] h6 {
+  font-size: var(--font-size-large);
+}
+[data-single-body] > p, [data-single-body] > ul,
+[data-single-body] > ol, [data-single-body] > code,
+[data-single-body] > blockquote {
+  font-size: var(--font-size-medium);
+}
+[data-single-body] > p {
+  line-height: 1.6;
+}
+
 [data-ogp-link] {
   overflow: hidden;
   position: relative;

@@ -77,7 +77,7 @@ function highlight(code: string) {
     .value
 }
 
-const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
+export const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
   slug,
   bodyCopy,
   ogp,
