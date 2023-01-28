@@ -97,6 +97,18 @@
 [data-single-body] > p {
   line-height: 1.6;
 }
+[data-single-body] > ul {
+  list-style-type: disc;
+}
+[data-single-body] > ul, [data-single-body] > ol {
+  padding-left: 2ch;
+  line-height: 1.8;
+}
+[data-single-body] > blockquote {
+  padding: 12px;
+  border-radius: 4px;
+  background-color: var(--sub-bg-colour);
+}
 
 [data-ogp-link] {
   overflow: hidden;

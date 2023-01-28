@@ -117,6 +117,21 @@
   > p {
     line-height: 1.6;
   }
+
+  > ul {
+    list-style-type: disc;
+  }
+
+  > ul, > ol {
+    padding-left: 2ch;
+    line-height: 1.8;
+  }
+
+  > blockquote {
+    padding: 12px;
+    border-radius: 4px;
+    background-color: var(--sub-bg-colour);
+  }
 }
 
 [data-ogp-link] {
