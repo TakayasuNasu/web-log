@@ -37,6 +37,7 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
   } = data
 
   const url = `https://weblog.i-nasu.com${location.pathname}`
+  const image = `https://weblog.i-nasu.com${ogImage}`
 
   return {
     title: `${name} | weblog.i-nasu.com`,
@@ -45,7 +46,8 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
     "og:title": `${name} | weblog.i-nasu.com`,
     "og:description": excerpt,
     "og:site_name": "weblog.i-nasu.com",
-    "og:image": `https://weblog.i-nasu.com${ogImage}`,
+    "og:image": image,
+    "twitter:card": image,
   }
 }
 
