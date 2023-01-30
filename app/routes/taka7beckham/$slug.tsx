@@ -47,7 +47,9 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
     "og:description": excerpt,
     "og:site_name": "weblog.i-nasu.com",
     "og:image": image,
-    "twitter:card": image,
+    "twitter:card": "summary_large_image",
+    "twitter:creator": "@taka7beckham",
+    "twitter:site": "@taka7beckham",
   }
 }
 
