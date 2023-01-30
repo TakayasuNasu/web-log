@@ -1,4 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node"
+import type { LoaderArgs, MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 
@@ -12,6 +12,7 @@ import { Body, SingleBody } from "~/components/status"
 
 // assets
 import face from "~/images/face.png"
+import ogImage from "~/images/ogp-vancouver.jpg"
 
 export function links() {
   return [...statusLinks()]
@@ -28,6 +29,24 @@ export const loader = async ({ params }: LoaderArgs) => {
     throw new Response("Not Found", { status: 404 })
   }
   return json({ post: post })
+}
+
+export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
+  const {
+    post: { name, excerpt },
+  } = data
+
+  const url = `https://weblog.i-nasu.com${location.pathname}`
+
+  return {
+    title: `${name} | weblog.i-nasu.com`,
+    description: excerpt,
+    "og:url": url,
+    "og:title": `${name} | weblog.i-nasu.com`,
+    "og:description": excerpt,
+    "og:site_name": "weblog.i-nasu.com",
+    "og:image": ogImage,
+  }
 }
 
 export default function PostSlug() {
