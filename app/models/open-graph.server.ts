@@ -23,14 +23,11 @@ export async function getOgpData(url: string) {
 }
 
 export async function getPostWithOgpData(posts: Array<Post>) {
-  const postWithOgp: Array<PostWithOgp> = []
-
-  await Promise.all(
+  const postWithOgp = await Promise.all(
     posts.map(async (post) => {
       const url = pickUrlFromMd(post)
       if (!url) {
-        postWithOgp.push(post)
-        return
+        return post
       }
       const data = await getOgpData(url)
       const { ogTitle, ogDescription, ogUrl, ogImage } = data
@@ -39,14 +36,12 @@ export async function getPostWithOgpData(posts: Array<Post>) {
         !Array.isArray(ogImage) &&
         ogImage != null
       ) {
-        postWithOgp.push({
-          ...post,
-          ogp: { ogTitle, ogDescription, ogUrl, ogImage },
-        })
+        return { ...post, ogp: { ogTitle, ogDescription, ogUrl, ogImage } }
       }
     })
   )
-  return postWithOgp
+
+  return postWithOgp as Array<PostWithOgp>
 }
 
 function pickUrlFromMd(post: Post) {
