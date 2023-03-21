@@ -10,3 +10,9 @@ This project uses:
 - TypeScript
 - Contentful
 - Netlify
+
+### Other
+
+```bash
+yarn upgrade-interactive --latest
+```

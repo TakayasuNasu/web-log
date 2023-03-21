@@ -24,7 +24,7 @@ const Sidebar: FC = (): JSX.Element => {
 
 export default Sidebar
 
-const TwitterTimeline = () => {
+export const TwitterTimeline = () => {
   useEffect(() => {
     const script = document.createElement("script")
     script.async = true
@@ -40,7 +40,7 @@ const TwitterTimeline = () => {
     <a
       className="twitter-timeline"
       href="https://twitter.com/taka7beckham?ref_src=twsrc%5Etfw"
-      data-chrome="transparent noheader nofooter"
+      data-chrome="noheader nofooter noborders noscrollbar transparent"
       data-tweet-limit="6"
     ></a>
   )
