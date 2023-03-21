@@ -107,30 +107,12 @@ const clientThemeCode = `
       cl.add(theme)
     }
 
-    const meta = document.querySelector('meta[name=color-scheme]')
-
-    if (meta) {
-      if (theme === 'dark') {
-        meta.content = 'dark light'
-      } else if (theme === 'light') {
-        meta.content = 'light dark'
-      }
-    } else {
-      console.warn("Hey, could you let me know you're seeing this message? Thanks!")
-    }
 })()
 `
 
 function ThemeHead({ ssrTheme }: { ssrTheme: boolean }) {
-  const [theme] = useTheme()
-
   return (
     <>
-      <meta
-        name="color-scheme"
-        content={theme === "light" ? "light dark" : "dark light"}
-      />
-
       {ssrTheme ? null : (
         <>
           <script dangerouslySetInnerHTML={{ __html: clientThemeCode }} />

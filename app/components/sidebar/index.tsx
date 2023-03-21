@@ -1,5 +1,7 @@
-import React, { useEffect } from "react"
 import type { FC } from "react"
+
+// components
+import TwitterTimeline from "../twitterTimeline"
 
 // style
 import styles from "./styles.css"
@@ -23,25 +25,3 @@ const Sidebar: FC = (): JSX.Element => {
 }
 
 export default Sidebar
-
-export const TwitterTimeline = () => {
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.async = true
-    script.src = "https://platform.twitter.com/widgets.js"
-    document.body.appendChild(script)
-
-    return () => {
-      document.body.removeChild(script)
-    }
-  }, [])
-
-  return (
-    <a
-      className="twitter-timeline"
-      href="https://twitter.com/taka7beckham?ref_src=twsrc%5Etfw"
-      data-chrome="noheader nofooter noborders noscrollbar transparent"
-      data-tweet-limit="6"
-    ></a>
-  )
-}
