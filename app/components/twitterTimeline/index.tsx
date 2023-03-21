@@ -18,6 +18,18 @@ const TwitterTimeline: FC = (): JSX.Element => {
     }
   }, [])
 
+  useEffect(() => {
+    const tweet = document.getElementById("twitter-widget-0")
+    if (tweet) {
+      const src = tweet.getAttribute("src")!
+      const currentTheme = theme == "dark" ? "light" : "dark"
+      tweet.setAttribute(
+        "src",
+        src.replace("theme=" + currentTheme, "theme=" + theme)
+      )
+    }
+  }, [theme])
+
   return (
     <a
       className="twitter-timeline"

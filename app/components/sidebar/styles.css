@@ -6,5 +6,14 @@
     display: block;
   }
 }
+[data-sidebar] header {
+  margin-top: 14px;
+}
+[data-sidebar] h2 {
+  font-size: var(--font-size-medium);
+}
+[data-sidebar] ul.timeline {
+  margin-block: 24px;
+}
 
 /*# sourceMappingURL=styles.css.map */

@@ -4,4 +4,16 @@
   @container layout (min-width: 880px) {
     display: block;
   }
+
+  header {
+    margin-top: 14px;
+  }
+
+  h2 {
+    font-size: var(--font-size-medium);
+  }
+
+  ul.timeline {
+    margin-block: 24px;
+  }
 }

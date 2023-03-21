@@ -12,10 +12,10 @@ const Sidebar: FC = (): JSX.Element => {
   return (
     <section data-sidebar>
       <header>
-        <h2>What's going on?</h2>
+        <h2>Recent Tweet</h2>
       </header>
 
-      <ul>
+      <ul className="timeline">
         <li>
           <TwitterTimeline />
         </li>
