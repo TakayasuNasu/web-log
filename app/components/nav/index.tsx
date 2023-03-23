@@ -18,10 +18,18 @@ import type { MastaData } from "~/models/contentful.server"
 // context
 import { useAppContext } from "~/context/store"
 
+// components
+import FancyButton, {
+  links as fancyButtonStyle,
+} from "~/components/reusable/buttonLink"
+
 // style
 import styles from "./styles.css"
 
-export const links = () => [{ rel: "stylesheet", href: styles }]
+export const links = () => [
+  ...fancyButtonStyle(),
+  { rel: "stylesheet", href: styles },
+]
 
 type ComponentProps = {
   hashtags: Array<Hashtag>
@@ -74,6 +82,7 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
             <p>Home</p>
           </div>
         </li>
+
         {hashtags.map((tag, i) => {
           return (
             <li key={i} onClick={() => navigate(`/?tag=${tag.slug}`)}>
@@ -84,6 +93,10 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
             </li>
           )
         })}
+
+        <li className="button">
+          <FancyButton to="https://www.i-nasu.com/">i-nasu.com</FancyButton>
+        </li>
       </ul>
     </nav>
   )

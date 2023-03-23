@@ -1,0 +1,55 @@
+[data-fancy] {
+  display: none;
+  position: relative;
+  font-size: var(--font-size-medium);
+  font-weight: 700;
+  color: #27496D;
+  text-decoration: none;
+}
+@media (min-width: 1440px) {
+  [data-fancy] {
+    display: inline-block;
+  }
+}
+[data-fancy]:before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  bottom: 10px;
+  inset-inline: 30px;
+  height: 40px;
+  border-radius: 30em;
+  opacity: 0;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease-out;
+  filter: blur(20px) brightness(0.95);
+}
+[data-fancy]:hover:before {
+  background: #fa6c9f;
+  background: -moz-linear-gradient(left, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  background: -webkit-linear-gradient(left, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  background: linear-gradient(to right, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  bottom: -4px;
+  opacity: 1;
+  filter: blur(12px);
+}
+[data-fancy]:hover span {
+  filter: brightness(1.05) contrast(1.05);
+  transform: scale(1.04);
+}
+[data-fancy] span {
+  background: #fa6c9f;
+  background: -moz-linear-gradient(left, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  background: -webkit-linear-gradient(left, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  background: linear-gradient(to right, #fa6c9f 0%, #ffe140 80%, #ffe140 100%);
+  display: block;
+  position: relative;
+  padding: 16px 60px;
+  border-radius: 50em;
+  z-index: 2;
+  transform-style: preserve-3d;
+  transition: 0.4s ease-out;
+}
+
+/*# sourceMappingURL=buttonStyle.css.map */

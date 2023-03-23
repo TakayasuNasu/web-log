@@ -1,0 +1,60 @@
+@mixin gradientBg($startColor, $endColor) {
+	background: $startColor;
+	background: -moz-linear-gradient(left,  $startColor 0%, $endColor 80%,$endColor 100%);
+	background: -webkit-linear-gradient(left,  $startColor 0%, $endColor 80%,$endColor 100%);
+	background: linear-gradient(to right,  $startColor 0%, $endColor 80%,$endColor 100%);
+}
+
+[data-fancy] {
+  display: none;
+  @media (min-width: 1440px) {
+    display: inline-block;
+  }
+
+	position: relative;
+	font-size: var(--font-size-medium);
+  font-weight: 700;
+	color: #27496D;
+  text-decoration: none;
+
+  &:before {
+    content: '';
+		display: block;
+		position: absolute;
+		z-index: -1;
+		bottom: 10px;
+    inset-inline: 30px;
+		height: 40px;
+		border-radius: 30em;
+    opacity: 0;
+		transform-style: preserve-3d;
+		transition: all 0.3s ease-out;
+		filter: blur(20px) brightness(0.95);
+  }
+
+  &:hover {
+
+		&:before {
+      @include gradientBg(#fa6c9f, #ffe140);
+      bottom: -4px;
+      opacity: 1;
+      filter: blur(12px);
+		}
+
+    span {
+			filter: brightness(1.05) contrast(1.05);
+      transform: scale(1.04);
+		}
+	}
+
+  span {
+    @include gradientBg(#fa6c9f, #ffe140);
+    display: block;
+		position: relative;
+		padding: 16px 60px;
+		border-radius: 50em;
+		z-index: 2;
+		transform-style: preserve-3d;
+		transition: 0.4s ease-out;
+  }
+}

@@ -41,6 +41,12 @@
       transition: 0.4s;
     }
   }
+
+  li.button {
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 [data-mobile-nav-layer] {
