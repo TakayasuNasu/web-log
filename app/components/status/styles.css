@@ -68,7 +68,7 @@
   font-size: var(--font-size-small);
 }
 [data-status-body] > p {
-  line-height: 1.25;
+  line-height: 1.5;
 }
 [data-status-body] > ul {
   list-style-type: disc;
