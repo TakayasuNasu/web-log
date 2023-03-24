@@ -14,8 +14,9 @@ export type Ogp = {
 export type PostWithOgp = Post & { ogp?: Ogp }
 
 export async function getOgpData(url: string) {
-  if (hasCache("ogp")) {
-    return getFromCache("ogp")
+  const key = `ogp-${url}`
+  if (hasCache(key)) {
+    return getFromCache(key)
   }
 
   const data = await ogp({ url: url, onlyGetOpenGraphInfo: true })
@@ -24,7 +25,7 @@ export async function getOgpData(url: string) {
     throw data.error
   }
 
-  setToCache("ogp", data.result)
+  setToCache(key, data.result)
 
   return data.result
 }

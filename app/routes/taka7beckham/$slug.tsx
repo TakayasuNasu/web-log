@@ -6,6 +6,12 @@ import { useLoaderData } from "@remix-run/react"
 import { client } from "~/models/contentful.server"
 import { getPostWithOgpData } from "~/models/open-graph.server"
 
+// types
+import { Post } from "~/models/contentful.server"
+
+// functions
+import { getFromCache, hasCache } from "~/cache"
+
 // components
 import { links as statusLinks } from "~/components/status"
 import { Body, SingleBody } from "~/components/status"
@@ -19,7 +25,9 @@ export function links() {
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const posts = await client.getPosts()
+  const posts = hasCache("posts")
+    ? (getFromCache("posts") as Post[])
+    : await client.getPosts()
 
   const post = (await getPostWithOgpData(posts)).find(
     (post) => post.slug == params.slug
