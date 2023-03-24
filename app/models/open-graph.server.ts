@@ -1,23 +1,30 @@
 import ogp from "open-graph-scraper"
-import { imageObject } from "open-graph-scraper"
+import { ImageObject } from "open-graph-scraper/lib/types"
 import type { Post } from "./contentful.server"
+import { getFromCache, setToCache, hasCache } from "~/cache"
 
 export type Ogp = {
   ogTitle?: string
   ogType?: string
   ogUrl?: string
   ogDescription?: string
-  ogImage?: imageObject
+  ogImage?: ImageObject
 }
 
 export type PostWithOgp = Post & { ogp?: Ogp }
 
 export async function getOgpData(url: string) {
+  if (hasCache("ogp")) {
+    return getFromCache("ogp")
+  }
+
   const data = await ogp({ url: url, onlyGetOpenGraphInfo: true })
 
   if (data.error) {
     throw data.error
   }
+
+  setToCache("ogp", data.result)
 
   return data.result
 }
