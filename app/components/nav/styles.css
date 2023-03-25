@@ -1,14 +1,16 @@
-[data-main-nav] ul {
+[data-main-nav] ul.nav-list {
   display: none;
+  position: sticky;
+  top: 12px;
 }
 @container layout (min-width: 680px) {
-  [data-main-nav] ul {
+  [data-main-nav] ul.nav-list {
     display: grid;
     width: 80px;
   }
 }
 @container layout (min-width: 1240px) {
-  [data-main-nav] ul {
+  [data-main-nav] ul.nav-list {
     width: 230px;
   }
 }
