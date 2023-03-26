@@ -25,7 +25,12 @@
     @container layout (min-width: 680px) {
       display: flex;
       align-items: center;
-      column-gap: 24px;
+      justify-content: space-between;
+      padding-inline: 12px;
+    }
+
+    li.back-arrow {
+      cursor: pointer;
     }
   }
 

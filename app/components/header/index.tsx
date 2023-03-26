@@ -1,5 +1,6 @@
 import React from "react"
 import type { FC } from "react"
+import { useNavigate } from "@remix-run/react"
 import { HiOutlineArrowLeft } from "react-icons/hi"
 import { Theme, useTheme } from "~/utils/theme-provider"
 
@@ -17,6 +18,8 @@ export const links = () => [{ rel: "stylesheet", href: styles }]
 const Header: FC = (): JSX.Element => {
   const { toggle } = useAppContext()
 
+  const navigate = useNavigate()
+
   return (
     <header data-header>
       <ul className="mobile">
@@ -30,7 +33,7 @@ const Header: FC = (): JSX.Element => {
       </ul>
 
       <ul className="desktop">
-        <li>
+        <li onClick={() => navigate(-1)} className="back-arrow">
           <HiOutlineArrowLeft />
         </li>
         <li>

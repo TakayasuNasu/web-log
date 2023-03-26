@@ -26,8 +26,12 @@
   [data-header] ul.desktop {
     display: flex;
     align-items: center;
-    column-gap: 24px;
+    justify-content: space-between;
+    padding-inline: 12px;
   }
+}
+[data-header] ul.desktop li.back-arrow {
+  cursor: pointer;
 }
 [data-header] input[type=checkbox] {
   display: none;
