@@ -2,7 +2,7 @@ import LRU from "lru-cache"
 
 const cache = new LRU({
   max: 1000,
-  ttl: 1000 * 60 * 60,
+  ttl: 1000 * 60 * 60 * 4, // 4 hours
 })
 
 export function getFromCache(key: string): any {
