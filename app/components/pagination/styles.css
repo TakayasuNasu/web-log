@@ -1,0 +1,15 @@
+[data-pagination] {
+  display: flex;
+  justify-content: center;
+  column-gap: 24px;
+  margin-block: 24px;
+}
+[data-pagination] ul.number {
+  display: flex;
+  column-gap: 16px;
+}
+[data-pagination] p, [data-pagination] li {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=styles.css.map */

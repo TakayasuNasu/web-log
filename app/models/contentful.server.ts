@@ -25,6 +25,7 @@ export type MastaData = {
   nationality: string
   nickname: string
   description: string
+  perPage: number
 }
 
 export type Masta = {
@@ -82,6 +83,7 @@ async function getSiteMasta() {
     if (data.key == "nationality") masta.nationality = data.value
     if (data.key == "nickname") masta.nickname = data.value
     if (data.key == "description") masta.description = data.value
+    if (data.key == "perPage") masta.perPage = Number(data.value)
   })
 
   return masta as MastaData
