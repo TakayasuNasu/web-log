@@ -1,5 +1,5 @@
 import ogp from "open-graph-scraper"
-import { ImageObject } from "open-graph-scraper/lib/types"
+import { ImageObject } from "open-graph-scraper/dist/lib/types"
 import type { Post } from "./contentful.server"
 import { getFromCache, setToCache, hasCache } from "~/cache"
 

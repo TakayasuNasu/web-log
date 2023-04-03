@@ -98,25 +98,7 @@ export const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
     highlight: highlight,
   })
 
-  const renderer = new marked.Renderer()
-
-  renderer.link = (href, title, text) => {
-    if (!href || !text || !ogp) {
-      return ``
-    }
-    if (title === null) {
-      return renderToString(
-        <a href={href} target="_blank">
-          {text}
-        </a>
-      )
-    }
-    return renderToString(<OgpComponent {...ogp} />)
-  }
-
-  marked.use({ renderer })
-
-  const html = marked(bodyCopy)
+  const html = markedHtml(bodyCopy, ogp)
 
   return (
     <main
@@ -136,6 +118,12 @@ export const SingleBody: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
     highlight: highlight,
   })
 
+  const html = markedHtml(bodyCopy, ogp)
+
+  return <main data-single-body dangerouslySetInnerHTML={{ __html: html }} />
+}
+
+const markedHtml = (bodyCopy: string, ogp?: Ogp) => {
   const renderer = new marked.Renderer()
 
   renderer.link = (href, title, text) => {
@@ -155,8 +143,7 @@ export const SingleBody: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
   marked.use({ renderer })
 
   const html = marked(bodyCopy)
-
-  return <main data-single-body dangerouslySetInnerHTML={{ __html: html }} />
+  return html
 }
 
 const OgpComponent: FC<Ogp> = ({
