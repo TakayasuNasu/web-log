@@ -1,6 +1,6 @@
-import LRU from "lru-cache"
+import { LRUCache } from "lru-cache"
 
-const cache = new LRU({
+const cache = new LRUCache({
   max: 1000,
   ttl: 1000 * 60 * 60,
 })
