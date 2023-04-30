@@ -3,8 +3,6 @@ import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { client } from "~/models/contentful.server"
-import { getPostWithOgpData } from "~/models/open-graph.server"
-import { setToCache } from "~/cache"
 
 // type
 import type { Post } from "~/models/contentful.server"
@@ -20,12 +18,10 @@ export function links() {
 export async function loader({ request }: LoaderArgs) {
   const url = new URL(request.url)
   const tag = url.searchParams.get("tag")
-  const posts = await client.getPosts(tag)
-  setToCache("posts", posts)
 
   return json({
     masta: await client.getSiteMasta(),
-    posts: await getPostWithOgpData(posts),
+    posts: await client.getPosts(tag),
   })
 }
 

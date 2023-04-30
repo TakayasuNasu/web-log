@@ -1,0 +1,100 @@
+[data-status-body] pre[class*=language-] {
+  position: relative;
+}
+[data-status-body] .token.namespace {
+  opacity: 0.7;
+}
+[data-status-body] .token.comment,
+[data-status-body] .token.prolog,
+[data-status-body] .token.doctype,
+[data-status-body] .token.cdata {
+  color: #94a1b3;
+}
+[data-status-body] .token.operator,
+[data-status-body] .token.boolean,
+[data-status-body] .token.number {
+  color: #ffc56d;
+}
+[data-status-body] .token.attr-name,
+[data-status-body] .token.string {
+  color: #ffc56d;
+}
+[data-status-body] .token.entity,
+[data-status-body] .token.url,
+[data-status-body] .language-css .token.string,
+[data-status-body] .style .token.string {
+  color: #ffc56d;
+}
+[data-status-body] .token.selector {
+  color: #ff8fa3;
+}
+[data-status-body] .token.atrule,
+[data-status-body] .token.attr-value,
+[data-status-body] .token.keyword,
+[data-status-body] .token.important {
+  color: #ff8fa3;
+}
+[data-status-body] .token.deleted {
+  color: #ff8fa3;
+}
+[data-status-body] .token.inserted {
+  color: #b4ff9b;
+}
+[data-status-body] .token.deleted:not(.prefix) {
+  background: rgba(218, 54, 50, 0.2);
+  color: inherit;
+  display: block;
+}
+[data-status-body] .token.prefix {
+  user-select: none;
+}
+[data-status-body] .token.inserted:not(.prefix) {
+  background: rgba(0, 146, 27, 0.2);
+  color: inherit;
+  display: block;
+}
+[data-status-body] .token.coord {
+  color: #aad4ff;
+}
+[data-status-body] .token.regex,
+[data-status-body] .token.statement {
+  color: #ffc56d;
+}
+[data-status-body] .token.placeholder,
+[data-status-body] .token.variable {
+  color: #fff;
+}
+[data-status-body] .token.important,
+[data-status-body] .token.statement,
+[data-status-body] .token.bold {
+  font-weight: 700;
+}
+[data-status-body] .token.punctuation {
+  color: #939bc1;
+}
+[data-status-body] .token.entity {
+  cursor: help;
+}
+[data-status-body] .token.italic {
+  font-style: italic;
+}
+[data-status-body] .token.tag,
+[data-status-body] .token.property,
+[data-status-body] .token.function {
+  color: #38c7ff;
+}
+[data-status-body] .token.attr-name {
+  color: #ff8fa3;
+}
+[data-status-body] .token.attr-value {
+  color: #ffc56d;
+}
+[data-status-body] .token.style,
+[data-status-body] .token.script {
+  color: #ffc56d;
+}
+[data-status-body] .token.script .token.keyword {
+  color: #ffc56d;
+}
+
+/*# sourceMappingURL=prism.css.map */

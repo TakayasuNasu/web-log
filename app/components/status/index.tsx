@@ -3,29 +3,35 @@ import type { FC } from "react"
 import { Link } from "@remix-run/react"
 import { useNavigate } from "@remix-run/react"
 import { marked } from "marked"
-import hljs from "highlight.js"
+import { ClientOnly } from "remix-utils"
 
 // type
-import type { PostWithOgp, Ogp } from "~/models/open-graph.server"
+import type { Post } from "~/models/contentful.server"
+import type { Ogp } from "~/models/open-graph.server"
 
 // assets
 import face from "~/images/face.png"
 
 // styles
 import styles from "./styles.css"
+import prismStyle from "./prism.css"
+import contentStyle from "./content.css"
+import embedStyle from "./embed.css"
 import highlightStyle from "highlight.js/styles/tokyo-night-dark.css"
 
 export const links = () => [
   { rel: "stylesheet", href: highlightStyle },
+  { rel: "stylesheet", href: prismStyle },
+  { rel: "stylesheet", href: embedStyle },
+  { rel: "stylesheet", href: contentStyle },
   { rel: "stylesheet", href: styles },
 ]
 
-const Status: FC<PostWithOgp> = ({
+const Status: FC<Post> = ({
   sys: { publishedAt },
   slug,
   bodyCopy,
   reply,
-  ogp,
 }): JSX.Element => {
   const date = new Date(publishedAt)
 
@@ -37,28 +43,12 @@ const Status: FC<PostWithOgp> = ({
             <img src={face} alt="face photo" />
           </figure>
         </Link>
+
         <div className="body">
-          <header>
-            <ul>
-              <li className="name">
-                <p>Tak</p>
-              </li>
-              <li className="email">
-                <p>taka.beckham@gmail.com</p>
-              </li>
-              <li className="date">
-                <p>
-                  {date.toLocaleString("en-us", {
-                    day: "2-digit",
-                    month: "short",
-                    year: "numeric",
-                    timeZone: "America/Los_Angeles",
-                  })}
-                </p>
-              </li>
-            </ul>
-          </header>
-          <Body {...{ slug, bodyCopy, ogp }} />
+          <StatusHeader date={date} />
+
+          <Body {...{ slug, bodyCopy }} />
+
           <footer>
             <ul>
               <li></li>
@@ -72,15 +62,36 @@ const Status: FC<PostWithOgp> = ({
 
 export default Status
 
-function highlight(code: string) {
-  return hljs.highlightAuto(code, ["html", "javascript", "typescript", "bash"])
-    .value
+export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
+  return (
+    <header>
+      <ul>
+        <li className="name">
+          <p>Takc</p>
+        </li>
+
+        <li className="email">
+          <p>taka.beckham@gmail.com</p>
+        </li>
+
+        <li className="date">
+          <p>
+            {date.toLocaleString("en-us", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+              timeZone: "America/Los_Angeles",
+            })}
+          </p>
+        </li>
+      </ul>
+    </header>
+  )
 }
 
-export const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
+export const Body: FC<{ slug: string; bodyCopy: string }> = ({
   slug,
   bodyCopy,
-  ogp,
 }): JSX.Element => {
   const navigate = useNavigate()
 
@@ -93,34 +104,33 @@ export const Body: FC<{ slug: string; bodyCopy: string; ogp?: Ogp }> = ({
     }
   }
 
-  marked.setOptions({
-    langPrefix: "hljs language-",
-    highlight: highlight,
-  })
-
-  const html = markedHtml(bodyCopy, ogp)
-
   return (
-    <main
-      data-status-body
-      dangerouslySetInnerHTML={{ __html: html }}
-      onClick={(e) => handleClick(e, slug)}
-    />
+    <ClientOnly fallback={null}>
+      {() => (
+        <main
+          data-status-body
+          dangerouslySetInnerHTML={{ __html: bodyCopy }}
+          onClick={(e) => handleClick(e, slug)}
+        />
+      )}
+    </ClientOnly>
   )
 }
 
-export const SingleBody: FC<{ bodyCopy: string; ogp?: Ogp }> = ({
+export const SingleBody: FC<{ bodyCopy: string }> = ({
   bodyCopy,
-  ogp,
 }): JSX.Element => {
-  marked.setOptions({
-    langPrefix: "hljs language-",
-    highlight: highlight,
-  })
-
-  const html = markedHtml(bodyCopy, ogp)
-
-  return <main data-single-body dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <ClientOnly fallback={null}>
+      {() => (
+        <main
+          data-status-body
+          data-single-body
+          dangerouslySetInnerHTML={{ __html: bodyCopy }}
+        />
+      )}
+    </ClientOnly>
+  )
 }
 
 const markedHtml = (bodyCopy: string, ogp?: Ogp) => {

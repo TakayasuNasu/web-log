@@ -1,0 +1,261 @@
+[data-status-body] {
+  cursor: pointer;
+
+  > * {
+    margin-top: 16px;
+  }
+
+  h1, h2, h3,
+  h4, h5, h6 {
+    font-size: var(--font-size-medium);
+  }
+
+  > p, > ul,
+  > ol, > code,
+  > blockquote {
+    font-size: var(--font-size-medium);
+  }
+
+  > p, blockquote {
+    line-height: 1.8;
+  }
+
+  a {
+    color: var(--link-colour);
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+
+  .contains-task-list {
+    .task-list-item {
+      list-style: none;
+    }
+  }
+  .task-list-item-checkbox {
+    margin-left: -1.5em;
+    font-size: 1em;
+    pointer-events: none;
+  }
+
+  ul,
+  ol {
+    margin: 1.4rem 0;
+    line-height: 1.8;
+    & > li {
+      margin: 0.4rem 0;
+    }
+    ul,
+    ol {
+      margin: 0.2em 0;
+    }
+    p {
+      margin: 0;
+    }
+  }
+
+  ul {
+    padding-left: 1.8em;
+    & > li {
+      list-style: disc;
+      &::marker {
+        color: rgb(94, 100, 120);
+      }
+    }
+  }
+
+  ol {
+    padding-left: 1.7em;
+    & > li {
+      list-style: decimal;
+      padding-left: 0.2em;
+      &::marker {
+        color: rgb(83, 88, 114);
+      }
+    }
+  }
+  
+  blockquote {
+    padding: 12px;
+    border-radius: 4px;
+    background-color: var(--sub-bg-colour);
+
+    & > :first-child {
+      margin-top: 0;
+    }
+  
+    & > :last-child {
+      margin-bottom: 0;
+    }
+
+    &.twitter-tweet {
+      display: none;
+    }
+  }
+
+  table {
+    margin: 1.2rem auto;
+    width: auto;
+    border-collapse: collapse;
+    font-size: 0.95em;
+    line-height: 1.5;
+    word-break: normal;
+    display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  th,
+  td {
+    padding: 0.5rem;
+    border: solid 1px var(--border-colour);
+  }
+
+  th {
+    font-weight: 700;
+    background-color: var(--sub-bg-colour);
+  }
+
+  code {
+    padding: 0.2em 0.4em;
+    font-size: 0.85em;
+    border-radius: 4px;
+    vertical-align: 0.08em;
+  }
+
+  code,
+  .code-block-filename {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  pre {
+    margin: 1.3rem 0;
+    background: #1a1b26;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0.7em;
+    box-shadow: 0 4px 6px -1px rgb(0, 14, 30, 0.15);
+    word-break: normal;
+    word-wrap: normal;
+    display: flex;
+    &:after {
+      content: '';
+      width: 8px;
+      flex-shrink: 0;
+    }
+
+    code {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-size: 0.9em;
+      color: #fff;
+    }
+    & > code {
+      display: block;
+      padding: 1.1rem;
+    }
+  }
+
+  .code-block-container {
+    position: relative;
+    pre {
+      margin: 0;
+    }
+  }
+  
+  .code-block-filename {
+    display: table;
+    max-width: 100%;
+    background: #323e52;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    line-height: 1.3;
+    border-radius: 6px 6px 0 0;
+    padding: 6px 12px 20px;
+    margin-bottom: -16px;
+  }
+  
+  .code-block-filename-container + pre {
+    border-top-left-radius: 0;
+  }
+
+  img:not(.emoji) {
+    margin: 1.5rem auto;
+    display: table;
+    max-width: 100%;
+    height: auto;
+  }
+
+  img + br {
+    display: none;
+  }
+
+  img ~ em {
+    display: block;
+    margin: -1rem auto 0;
+    text-align: center;
+  }
+
+  aside.msg {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.4em 1em;
+    border-radius: 10px;
+    background: var(--background-colour);
+    font-size: 0.94em;
+    line-height: 1.6;
+  
+    &.alert {
+      color: #112D4E;
+      background: #ffeff2;
+    }
+  
+    a {
+      color: inherit;
+      text-decoration: underline;
+    }
+  }
+  
+  .msg-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    width: 2.0rem;
+    height: 2.0rem;
+    border-radius: 99rem;
+    background-color: var(--link-colour);
+    color: vat(--text-colour);
+  }
+  
+  aside.msg.alert .msg-symbol {
+    background-color: #ff7670;
+  }
+  
+  .msg-content {
+    flex: 1;
+    margin-left: 0.6em;
+    min-width: 0;
+  
+    &>* {
+      margin: 0.7rem 0;
+  
+      &:first-child {
+        margin-top: 0;
+      }
+  
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+[data-single-body] {
+  cursor: auto;
+}

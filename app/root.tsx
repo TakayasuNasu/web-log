@@ -67,6 +67,7 @@ function App() {
   return (
     <html lang="en" className={theme ?? ""}>
       <head>
+        <script src="https://embed.zenn.studio/js/listen-embed-event.js"></script>
         <Meta />
         <Links />
         <ThemeHead ssrTheme={Boolean(data.theme)} />
@@ -79,9 +80,12 @@ function App() {
             <Header />
             <Outlet />
           </main>
+
           <Sidebar />
         </div>
+
         <MobileNav {...{ masta, hashtags }} />
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

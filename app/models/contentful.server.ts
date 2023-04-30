@@ -1,3 +1,5 @@
+import markdownHtml from "zenn-markdown-html"
+
 const SPACE = process.env.CONTENTFUL_SPACE_ID
 const TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN
 const ENVIRONMENT = process.env.CONTENTFUL_ENVIRONMENT
@@ -212,13 +214,37 @@ export async function getPosts(slug?: string | null) {
     return Promise.reject(error)
   }
 
+  const posts = data.postCollection.items.map((post) => {
+    const bodyCopy = markdownHtml(post.bodyCopy, {
+      embedOrigin: "https://embed.zenn.studio",
+    })
+
+    const reply = (() => {
+      if (post.reply) {
+        const bodyCopy = markdownHtml(post.reply.bodyCopy, {
+          embedOrigin: "https://embed.zenn.studio",
+        })
+        return {
+          ...post.reply,
+          bodyCopy,
+        }
+      }
+    })()
+
+    return {
+      ...post,
+      bodyCopy,
+      reply,
+    }
+  })
+
   if (slug) {
-    return data?.postCollection.items.filter((post) => {
+    return posts?.filter((post) => {
       return post.collection.hashtags.some((tag) => tag.slug == slug)
     })
   }
 
-  return data?.postCollection.items
+  return posts
 }
 
 export const client = { getSiteMasta, getHashtagBy, getPosts }
