@@ -9,6 +9,7 @@
     "sass": "sass --watch app/scss/style.scss:app/styles/style.css app/components/:app/components/"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.8.0",
     "@netlify/functions": "^1.4.0",
     "@remix-run/netlify": "^1.15.0",
     "@remix-run/node": "^1.15.0",

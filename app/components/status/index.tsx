@@ -2,7 +2,6 @@ import { renderToString } from "react-dom/server"
 import type { FC } from "react"
 import { Link } from "@remix-run/react"
 import { useNavigate } from "@remix-run/react"
-import { marked } from "marked"
 import { ClientOnly } from "remix-utils"
 
 // type
@@ -131,29 +130,6 @@ export const SingleBody: FC<{ bodyCopy: string }> = ({
       )}
     </ClientOnly>
   )
-}
-
-const markedHtml = (bodyCopy: string, ogp?: Ogp) => {
-  const renderer = new marked.Renderer()
-
-  renderer.link = (href, title, text) => {
-    if (!href || !text || !ogp) {
-      return ``
-    }
-    if (title === null) {
-      return renderToString(
-        <a href={href} target="_blank">
-          {text}
-        </a>
-      )
-    }
-    return renderToString(<OgpComponent {...ogp} />)
-  }
-
-  marked.use({ renderer })
-
-  const html = marked(bodyCopy)
-  return html
 }
 
 const OgpComponent: FC<Ogp> = ({

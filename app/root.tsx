@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react"
+import { Partytown } from "@builder.io/partytown/react"
 
 // models
 import { client } from "~/models/contentful.server"
@@ -67,6 +68,7 @@ function App() {
   return (
     <html lang="en" className={theme ?? ""}>
       <head>
+        <Partytown debug={true} forward={["dataLayer.push"]} />
         <script src="https://embed.zenn.studio/js/listen-embed-event.js"></script>
         <Meta />
         <Links />
