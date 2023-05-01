@@ -9,7 +9,7 @@ const TwitterTimeline: FC = (): JSX.Element => {
 
   useEffect(() => {
     const script = document.createElement("script")
-    script.type = "text/partytown"
+    script.async = true
     script.src = "https://platform.twitter.com/widgets.js"
     document.body.appendChild(script)
 
