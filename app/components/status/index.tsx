@@ -9,7 +9,7 @@ import type { Post } from "~/models/contentful.server"
 import type { Ogp } from "~/models/open-graph.server"
 
 // assets
-import face from "~/images/face.png"
+import face from "~/images/face.webp"
 
 // styles
 import styles from "./styles.css"

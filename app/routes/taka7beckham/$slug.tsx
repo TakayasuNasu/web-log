@@ -17,7 +17,7 @@ import { StatusHeader, Body, SingleBody } from "~/components/status"
 
 // assets
 import ogImage from "~/images/ogp-vancouver.jpg"
-import face from "~/images/face.png"
+import face from "~/images/face.webp"
 
 export function links() {
   return [...statusLinks()]

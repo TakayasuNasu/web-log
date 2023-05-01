@@ -8,7 +8,7 @@ import { Theme, useTheme } from "~/utils/theme-provider"
 import { useAppContext } from "~/context/store"
 
 // assets
-import face from "~/images/face.png"
+import face from "~/images/face.webp"
 
 // style
 import styles from "./styles.css"

@@ -1,22 +1,12 @@
 import { useEffect } from "react"
 import type { FC } from "react"
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 // hooks
 import { useTheme } from "~/utils/theme-provider"
 
 const TwitterTimeline: FC = (): JSX.Element => {
   const [theme] = useTheme()
-
-  useEffect(() => {
-    const script = document.createElement("script")
-    script.async = true
-    script.src = "https://platform.twitter.com/widgets.js"
-    document.body.appendChild(script)
-
-    return () => {
-      document.body.removeChild(script)
-    }
-  }, [])
 
   useEffect(() => {
     const tweet = document.getElementById("twitter-widget-0")
@@ -31,13 +21,16 @@ const TwitterTimeline: FC = (): JSX.Element => {
   }, [theme])
 
   return (
-    <a
-      className="twitter-timeline"
-      href="https://twitter.com/taka7beckham?ref_src=twsrc%5Etfw"
-      data-chrome="noheader nofooter noborders noscrollbar transparent"
-      data-tweet-limit="6"
-      data-theme={theme == "light" ? "light" : "dark"}
-    ></a>
+    <TwitterTimelineEmbed
+      sourceType="profile"
+      screenName="taka7beckham"
+      noHeader={true}
+      noFooter={true}
+      noBorders={true}
+      noScrollbar={true}
+      transparent={true}
+      tweetLimit={8}
+      theme={theme == "light" ? "light" : "dark"} />
   )
 }
 

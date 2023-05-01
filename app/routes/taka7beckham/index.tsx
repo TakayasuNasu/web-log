@@ -10,7 +10,7 @@ import { client } from "~/models/contentful.server"
 
 // assets
 import about from "~/images/bg-about.jpg"
-import face from "~/images/face.png"
+import face from "~/images/face.webp"
 
 export const loader = async () => {
   return json({
