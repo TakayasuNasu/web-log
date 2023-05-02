@@ -73,12 +73,12 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
   const navigate = useNavigate()
   return (
     <nav data-main-nav>
-      <ul className="nav-list">
-        <li className="home" onClick={() => navigate("/")}>
+      <ul className="nav-list hidden md:grid">
+        <li className="home font-bold" onClick={() => navigate("/")}>
           <div className="icon">
             <AiOutlineHome />
           </div>
-          <div className="text">
+          <div className="text hidden xl:block">
             <p>Home</p>
           </div>
         </li>
@@ -87,7 +87,7 @@ const MainNav: FC<ComponentProps> = ({ hashtags }): JSX.Element => {
           return (
             <li key={i} onClick={() => navigate(`/?tag=${tag.slug}`)}>
               <div className="icon">{navIcon(tag.iconType)}</div>
-              <div className="text">
+              <div className="text hidden xl:block">
                 <p>{tag.name}</p>
               </div>
             </li>

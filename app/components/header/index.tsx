@@ -22,7 +22,7 @@ const Header: FC = (): JSX.Element => {
 
   return (
     <header data-header>
-      <ul className="mobile">
+      <ul className="mobile flex md:hidden">
         <li className="face" onClick={toggle}>
           <img src={face} alt="face" />
         </li>
@@ -32,7 +32,7 @@ const Header: FC = (): JSX.Element => {
         </li>
       </ul>
 
-      <ul className="desktop">
+      <ul className="desktop hidden md:flex items-center justify-between">
         <li onClick={() => navigate(-1)} className="back-arrow">
           <HiOutlineArrowLeft />
         </li>

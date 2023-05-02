@@ -1,11 +1,3 @@
-[data-sidebar] {
-  display: none;
-}
-@container layout (min-width: 880px) {
-  [data-sidebar] {
-    display: block;
-  }
-}
 [data-sidebar] header {
   margin-top: 14px;
 }

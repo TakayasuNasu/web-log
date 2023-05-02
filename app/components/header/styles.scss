@@ -1,14 +1,10 @@
 [data-header] {
   padding-block: 12px;
+
   ul.mobile {
-    display: flex;
     justify-content: space-between;
     margin-inline: block;
     
-    @container layout (min-width: 680px) {
-      display: none;
-    }
-
     li.face {
       overflow: hidden;
       width: min(10.8vw, 46px);
@@ -20,12 +16,7 @@
   }
 
   ul.desktop {
-    display: none;
-
-    @container layout (min-width: 680px) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    @media (min-width: 768px) {
       padding-inline: 12px;
     }
 

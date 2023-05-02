@@ -1,4 +1,3 @@
-import { renderToString } from "react-dom/server"
 import type { FC } from "react"
 import { Link } from "@remix-run/react"
 import { useNavigate } from "@remix-run/react"
@@ -11,15 +10,17 @@ import type { Ogp } from "~/models/open-graph.server"
 // assets
 import face from "~/images/face.webp"
 
+// icons
+import { BsFacebook } from "react-icons/bs"
+import { BsTwitter } from "react-icons/bs"
+
 // styles
 import styles from "./styles.css"
 import prismStyle from "./prism.css"
 import contentStyle from "./content.css"
 import embedStyle from "./embed.css"
-import highlightStyle from "highlight.js/styles/tokyo-night-dark.css"
 
 export const links = () => [
-  { rel: "stylesheet", href: highlightStyle },
   { rel: "stylesheet", href: prismStyle },
   { rel: "stylesheet", href: embedStyle },
   { rel: "stylesheet", href: contentStyle },
@@ -48,11 +49,8 @@ const Status: FC<Post> = ({
 
           <Body {...{ slug, bodyCopy }} />
 
-          <footer>
-            <ul>
-              <li></li>
-            </ul>
-          </footer>
+          <StatusFooter slug={slug} />
+
         </div>
       </article>
     </div>
@@ -66,7 +64,7 @@ export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
     <header>
       <ul>
         <li className="name">
-          <p>Takc</p>
+          <p>Tack</p>
         </li>
 
         <li className="email">
@@ -85,6 +83,17 @@ export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
         </li>
       </ul>
     </header>
+  )
+}
+
+export const StatusFooter: FC<{slug: string}> = ({ slug }): JSX.Element => {
+
+  return (
+    <footer>
+      <ul>
+        <li></li>
+      </ul>
+    </footer>
   )
 }
 

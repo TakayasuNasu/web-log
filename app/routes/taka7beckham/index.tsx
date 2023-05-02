@@ -27,7 +27,7 @@ export default function About() {
         style={{ backgroundImage: `url(${about})` }}
       ></figure>
 
-      <section className="outline">
+      <section className="out-line">
         <figure className="face">
           <img src={face} alt="face" />
         </figure>
@@ -38,7 +38,7 @@ export default function About() {
           <span>{masta.email}</span>
         </aside>
 
-        <p className="intro">{masta.introduction}</p>
+        <p className="intro leading-normal">{masta.introduction}</p>
 
         <aside className="list-wrapper">
           <ul className="list">

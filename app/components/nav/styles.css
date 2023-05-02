@@ -1,25 +1,15 @@
 [data-main-nav] ul.nav-list {
-  display: none;
   position: sticky;
   top: 12px;
 }
-@container layout (min-width: 680px) {
+@media (min-width: 768px) {
   [data-main-nav] ul.nav-list {
-    display: grid;
     width: 80px;
   }
 }
-@container layout (min-width: 1240px) {
+@media (min-width: 1280px) {
   [data-main-nav] ul.nav-list {
     width: 230px;
-  }
-}
-[data-main-nav] div.text {
-  display: none;
-}
-@container layout (min-width: 1240px) {
-  [data-main-nav] div.text {
-    display: block;
   }
 }
 [data-main-nav] li {
@@ -30,13 +20,10 @@
   font-size: var(--font-size-medium);
   cursor: pointer;
 }
-@container layout (min-width: 1240px) {
+@media (min-width: 1280px) {
   [data-main-nav] li {
     justify-content: flex-start;
   }
-}
-[data-main-nav] li.home {
-  font-weight: 700;
 }
 [data-main-nav] li:hover {
   opacity: 0.8;

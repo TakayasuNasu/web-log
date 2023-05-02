@@ -10,7 +10,7 @@ export const links = () => [{ rel: "stylesheet", href: styles }]
 
 const Sidebar: FC = (): JSX.Element => {
   return (
-    <section data-sidebar>
+    <section data-sidebar className="hidden xl:block">
       <header>
         <h2>Recent Tweet</h2>
       </header>

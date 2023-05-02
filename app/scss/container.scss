@@ -1,10 +1,9 @@
 [data-container] {
-  container: layout / inline-size;
   margin-block: 12px;
   margin-inline: auto;
   width: min(90%, 1240px);
 
-  @media (min-width: 766px) {
+  @media (min-width: 768px) {
     display: grid;
     grid-template-columns: auto minmax(10%, 600px);
     justify-content: start;
@@ -18,7 +17,7 @@
 
   > main {
 
-    @media (min-width: 766px) {
+    @media (min-width: 768px) {
       border-left: 1px solid var(--sub-bg-colour);
       border-right: 1px solid var(--sub-bg-colour);
     }

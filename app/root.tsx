@@ -22,6 +22,7 @@ import { AppContextProvider } from "~/context/store"
 import Header, { links as headerLinks } from "~/components/header"
 import Nav, { MobileNav, links as navLinks } from "~/components/nav"
 import Sidebar, { links as sidebarLinks } from "~/components/sidebar"
+import Footer, { links as footerLinks } from "./components/footer"
 
 // style
 import styles from "~/styles/style.css"
@@ -55,6 +56,7 @@ export function links() {
     ...headerLinks(),
     ...navLinks(),
     ...sidebarLinks(),
+    ...footerLinks(),
     { rel: "stylesheet", href: styles },
   ]
 }
@@ -83,6 +85,8 @@ function App() {
 
           <Sidebar />
         </div>
+
+        <Footer />
 
         <MobileNav {...{ masta, hashtags }} />
 

@@ -1,24 +1,14 @@
 [data-main-nav] {
   ul.nav-list {
-    display: none;
     position: sticky;
     top: 12px;
 
-    @container layout (min-width: 680px) {
-      display: grid;
+    @media (min-width: 768px) {
       width: 80px;
     }
 
-    @container layout (min-width: 1240px) {
+    @media (min-width: 1280px) {
       width: 230px;
-    }
-  }
-
-  div.text {
-    display: none;
-
-    @container layout (min-width: 1240px) {
-      display: block;
     }
   }
 
@@ -30,12 +20,8 @@
     font-size: var(--font-size-medium);
     cursor: pointer;
 
-    @container layout (min-width: 1240px) {
+    @media (min-width: 1280px) {
       justify-content: flex-start;
-    }
-
-    &.home {
-      font-weight: 700;
     }
 
     &:hover {

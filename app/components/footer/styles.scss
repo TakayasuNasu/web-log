@@ -1,0 +1,15 @@
+[data-site-footer] {
+  ul.social-media {
+    grid-template-columns: repeat(4, 1fr);
+    margin-inline: auto;
+    padding-block: 24px;
+
+
+    a {
+      display: block;
+      margin-inline: auto;
+      width: max-content;
+      color: var(--text-colour);
+    }
+  }
+}
