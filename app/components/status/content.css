@@ -6,7 +6,7 @@
 }
 [data-status-body] h1, [data-status-body] h2, [data-status-body] h3,
 [data-status-body] h4, [data-status-body] h5, [data-status-body] h6 {
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-large);
 }
 [data-status-body] > p, [data-status-body] > ul,
 [data-status-body] > ol, [data-status-body] > code,

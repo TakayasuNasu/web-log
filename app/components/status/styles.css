@@ -22,9 +22,7 @@
   min-width: 0;
 }
 [data-status] div.body header ul {
-  display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
-  column-gap: 12px;
 }
 [data-status] div.body header p {
   overflow: hidden;
@@ -70,6 +68,15 @@
 }
 [data-ogp-link] aside, [data-ogp-link] p {
   color: #72767a;
+}
+
+[data-status-footer] {
+  margin-top: 16px;
+}
+[data-status-footer] a {
+  display: block;
+  width: max-content;
+  color: var(--text-colour);
 }
 
 /*# sourceMappingURL=styles.css.map */

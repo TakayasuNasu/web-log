@@ -19,27 +19,9 @@
     }
   }
 
-  li.header {
-    > header ul {
-      display: grid;
+  header {
+    ul {
       grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
-      column-gap: 12px;
-    }
-
-    p {
-      overflow: hidden;
-      white-space: nowrap;
-      font-size: var(--font-size-small);
-      text-overflow: ellipsis;
-    }
-
-    li.name {
-      font-weight: 700;
-    }
-
-    li.email, li.date {
-      color: #72767a;
     }
   }
-
 }

@@ -236,22 +236,8 @@ ul[data-statuses] > li {
 [data-single] figure.face img {
   aspect-ratio: 1/1;
 }
-[data-single] li.header > header ul {
-  display: grid;
+[data-single] header ul {
   grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
-  column-gap: 12px;
-}
-[data-single] li.header p {
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: var(--font-size-small);
-  text-overflow: ellipsis;
-}
-[data-single] li.header li.name {
-  font-weight: 700;
-}
-[data-single] li.header li.email, [data-single] li.header li.date {
-  color: #72767a;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -1,19 +1,14 @@
 import type { LoaderArgs, MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
+import { Link } from "@remix-run/react"
 import { useLoaderData } from "@remix-run/react"
 
 // models
 import { client } from "~/models/contentful.server"
 
-// types
-import { Post } from "~/models/contentful.server"
-
-// functions
-import { getFromCache, hasCache } from "~/cache"
-
 // components
 import { links as statusLinks } from "~/components/status"
-import { StatusHeader, Body, SingleBody } from "~/components/status"
+import { StatusHeader, StatusFooter, Body, SingleBody } from "~/components/status"
 
 // assets
 import ogImage from "~/images/ogp-vancouver.jpg"
@@ -24,10 +19,6 @@ export function links() {
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const posts = hasCache("posts")
-    ? (getFromCache("posts") as Post[])
-    : await client.getPosts()
-
   const post = (await client.getPosts()).find(
     (post) => post.slug == params.slug
   )
@@ -64,6 +55,7 @@ export default function PostSlug() {
   const {
     post: {
       sys: { publishedAt },
+      slug,
       bodyCopy,
       reply,
     },
@@ -71,10 +63,27 @@ export default function PostSlug() {
   const date = new Date(publishedAt)
 
   return (
-    <article data-single data-has-reply={reply ? true : false}>
-      <StatusHeader date={date} />
+    <article
+      data-single
+      data-has-reply={reply ? true : false}>
 
-      <SingleBody {...{ bodyCopy }} />
+      <ul className="flex items-start gap-x-3">
+        <li>
+          <Link to="/taka7beckham">
+            <figure className="face">
+              <img src={face} alt="face photo" />
+            </figure>
+          </Link>
+        </li>
+
+        <li>
+          <StatusHeader date={date} />
+
+          <SingleBody {...{ bodyCopy }} />
+
+          <StatusFooter slug={slug} />
+        </li>
+      </ul>
 
       {reply &&
         (() => {
@@ -92,6 +101,10 @@ export default function PostSlug() {
 
                 <li>
                   <Body {...{ bodyCopy: reply.bodyCopy, slug: reply.slug }} />
+                </li>
+
+                <li>
+                  <StatusFooter slug={reply.slug} />
                 </li>
               </ul>
             </div>

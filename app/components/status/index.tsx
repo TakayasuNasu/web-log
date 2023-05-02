@@ -28,12 +28,12 @@ export const links = () => [
 ]
 
 const Status: FC<Post> = ({
-  sys: { publishedAt },
   slug,
+  publishedDate,
   bodyCopy,
   reply,
 }): JSX.Element => {
-  const date = new Date(publishedAt)
+  const date = new Date(publishedDate)
 
   return (
     <div data-status data-has-reply={reply ? true : false}>
@@ -62,7 +62,7 @@ export default Status
 export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
   return (
     <header>
-      <ul>
+      <ul className="grid gap-x-3">
         <li className="name">
           <p>Tack</p>
         </li>
@@ -88,10 +88,22 @@ export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
 
 export const StatusFooter: FC<{slug: string}> = ({ slug }): JSX.Element => {
 
+  const url = `https://weblog.i-nasu.com/taka7beckham/${slug}`
+  
   return (
-    <footer>
-      <ul>
-        <li></li>
+    <footer data-status-footer>
+      <ul className="grid grid-cols-2 mr-auto w-1/5">
+        <li>
+          <a href={`http://www.facebook.com/share.php?u=${url}`} rel="noreferrer noopener" target="_blank">
+            <BsFacebook />
+          </a>
+        </li>
+
+        <li>
+          <a href={`https://twitter.com/share?url=${url}`} rel="noreferrer noopener" target="_blank">
+            <BsTwitter />
+          </a>
+        </li>
       </ul>
     </footer>
   )

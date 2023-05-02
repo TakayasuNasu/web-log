@@ -156,7 +156,16 @@ export type Post = {
   name: string
   slug: string
   excerpt: string
+  featured: boolean
+  publishedDate: string
   bodyCopy: string
+  heroImage?: {
+    title: string
+    description: string
+    url: string
+    width: string
+    height: string
+  }
   collection: {
     hashtags: Array<Hashtag>
   }
@@ -183,7 +192,16 @@ export async function getPosts(slug?: string | null) {
         name
         slug
         excerpt
+        featured
+        publishedDate
         bodyCopy
+        heroImage {
+          title
+          description
+          url
+          width
+          height
+        }
         collection: hashtagsCollection {
           hashtags: items {
             name
@@ -196,6 +214,7 @@ export async function getPosts(slug?: string | null) {
             publishedAt
           }
           slug
+          publishedDate
           bodyCopy
         }
       }
@@ -214,7 +233,7 @@ export async function getPosts(slug?: string | null) {
     return Promise.reject(error)
   }
 
-  const posts = data.postCollection.items.map((post) => {
+  let posts = data.postCollection.items.map((post) => {
     const bodyCopy = markdownHtml(post.bodyCopy, {
       embedOrigin: "https://embed.zenn.studio",
     })
@@ -237,6 +256,20 @@ export async function getPosts(slug?: string | null) {
       reply,
     }
   })
+
+  const maped = posts.map((p, i) => ({ i, value: p.featured, date: p.publishedDate }))
+
+  posts = maped
+    .sort((a, b) => {
+      if (new Date(a.date) < new Date(b.date)) return 1
+      if (new Date(a.date) > new Date(b.date)) return -1
+      return 0
+    })
+    .sort((a) => {
+      if (a.value) return -1
+      return 0
+    })
+    .map(v => posts[v.i])
 
   if (slug) {
     return posts?.filter((post) => {
