@@ -67,7 +67,7 @@ export default function PostSlug() {
       data-single
       data-has-reply={reply ? true : false}>
 
-      <ul className="flex items-start gap-x-3">
+      <ul className="main-timeline flex items-start gap-x-3">
         <li>
           <Link to="/taka7beckham">
             <figure className="face">
@@ -76,7 +76,7 @@ export default function PostSlug() {
           </Link>
         </li>
 
-        <li>
+        <li className="w-full min-w-0">
           <StatusHeader date={date} />
 
           <SingleBody {...{ bodyCopy }} />

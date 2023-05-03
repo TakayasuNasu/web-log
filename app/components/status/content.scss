@@ -258,4 +258,11 @@
 
 [data-single-body] {
   cursor: auto;
+
+  > p {
+
+    @media (min-width: 768px) {
+      font-size: clamp(16px, 18 / 1024 * 100vw, 18px);
+    }
+  }
 }

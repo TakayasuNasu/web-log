@@ -223,5 +223,10 @@
 [data-single-body] {
   cursor: auto;
 }
+@media (min-width: 768px) {
+  [data-single-body] > p {
+    font-size: clamp(16px, 1.7578125vw, 18px);
+  }
+}
 
 /*# sourceMappingURL=content.css.map */

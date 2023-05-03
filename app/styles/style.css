@@ -239,5 +239,30 @@ ul[data-statuses] > li {
 [data-single] header ul {
   grid-template-columns: minmax(0, 1fr) minmax(0, 4fr) minmax(0, 3fr);
 }
+[data-single] header ul p {
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--font-size-small);
+  text-overflow: ellipsis;
+}
+[data-single] header ul li.name {
+  font-weight: 700;
+}
+[data-single] header ul li.email, [data-single] header ul li.date {
+  color: #72767a;
+}
+[data-single][data-has-reply=true] ul.main-timeline {
+  position: relative;
+}
+[data-single][data-has-reply=true] ul.main-timeline:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 20px;
+  left: min(8.2vw, 34px);
+  width: 2px;
+  height: 100%;
+  background-color: var(--border-colour);
+}
 
 /*# sourceMappingURL=style.css.map */
