@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node"
+import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import {
   Links,
@@ -41,14 +41,14 @@ export const loader = async ({ request }: LoaderArgs) => {
   })
 }
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
+export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
   const { masta } = data
-  return {
-    charset: "utf-8",
-    title: "History of Takayasu Nasu | weblog.i-nasu.com",
-    description: masta.description,
-    viewport: "width=device-width,initial-scale=1",
-  }
+  return [
+    { charset: "utf-8", },
+    { title: "History of Takayasu Nasu | weblog.i-nasu.com" },
+    { name: "description", content: masta.description, },
+    { viewport: "width=device-width,initial-scale=1", },
+  ]
 }
 
 export function links() {

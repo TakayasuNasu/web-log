@@ -1,4 +1,4 @@
-import type { LoaderArgs, MetaFunction } from "@remix-run/node"
+import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { Link } from "@remix-run/react"
 import { useLoaderData } from "@remix-run/react"
@@ -29,7 +29,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ post: post })
 }
 
-export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
+export const meta: V2_MetaFunction<typeof loader> = ({ location, data }) => {
   const {
     post: { name, excerpt },
   } = data
@@ -37,18 +37,18 @@ export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
   const url = `https://weblog.i-nasu.com${location.pathname}`
   const image = `https://weblog.i-nasu.com${ogImage}`
 
-  return {
-    title: `${name} | weblog.i-nasu.com`,
-    description: excerpt,
-    "og:url": url,
-    "og:title": `${name} | weblog.i-nasu.com`,
-    "og:description": excerpt,
-    "og:site_name": "weblog.i-nasu.com",
-    "og:image": image,
-    "twitter:card": "summary_large_image",
-    "twitter:creator": "@taka7beckham",
-    "twitter:site": "@taka7beckham",
-  }
+  return [
+    { title: `${name} | weblog.i-nasu.com`, },
+    { name: "description", content: excerpt },
+    { property: "og:url", content: url },
+    { property: "og:title", content: `${name} | weblog.i-nasu.com` },
+    { property: "og:description", content: excerpt },
+    { property: "og:site_name", content: "weblog.i-nasu.com" },
+    { property: "og:image", content: image },
+    { property: "twitter:card", content: "summary_large_image" },
+    { property: "twitter:creator", content: "@taka7beckham" },
+    { property: "twitter:site", content: "@taka7beckham" },
+  ]
 }
 
 export default function PostSlug() {
