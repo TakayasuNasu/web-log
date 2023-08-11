@@ -7,6 +7,7 @@ module.exports = {
       ? "./server.js"
       : undefined,
   ignoredRouteFiles: ["**/.*"],
+  serverModuleFormat: "cjs",
   future: {
     v2_normalizeFormMethod: true,
     v2_errorBoundary: true,

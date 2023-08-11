@@ -46,7 +46,7 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
     { charset: "utf-8", },
     { title: "History of Takayasu Nasu | weblog.i-nasu.com" },
     { name: "description", content: data?.masta.description, },
-    { viewport: "width=device-width,initial-scale=1", },
+    { name: "viewport", content: "width=device-width,initial-scale=1", },
   ]
 }
 

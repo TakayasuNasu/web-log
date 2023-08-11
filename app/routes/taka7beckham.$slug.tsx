@@ -30,19 +30,15 @@ export const loader = async ({ params }: LoaderArgs) => {
 }
 
 export const meta: V2_MetaFunction<typeof loader> = ({ location, data }) => {
-  const {
-    post: { name, excerpt },
-  } = data
-
   const url = `https://weblog.i-nasu.com${location.pathname}`
   const image = `https://weblog.i-nasu.com${ogImage}`
 
   return [
-    { title: `${name} | weblog.i-nasu.com`, },
-    { name: "description", content: excerpt },
+    { title: `${data?.post.name} | weblog.i-nasu.com`, },
+    { name: "description", content: data?.post.excerpt },
     { property: "og:url", content: url },
-    { property: "og:title", content: `${name} | weblog.i-nasu.com` },
-    { property: "og:description", content: excerpt },
+    { property: "og:title", content: `${data?.post.name} | weblog.i-nasu.com` },
+    { property: "og:description", content: data?.post.excerpt },
     { property: "og:site_name", content: "weblog.i-nasu.com" },
     { property: "og:image", content: image },
     { property: "twitter:card", content: "summary_large_image" },
