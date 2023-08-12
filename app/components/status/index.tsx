@@ -7,6 +7,9 @@ import { ClientOnly } from "remix-utils"
 import type { Post } from "~/models/contentful.server"
 import type { Ogp } from "~/models/open-graph.server"
 
+// components
+import Loading from "~/components/loading"
+
 // assets
 import face from "~/images/face.webp"
 
@@ -125,7 +128,7 @@ export const Body: FC<{ slug: string; bodyCopy: string }> = ({
   }
 
   return (
-    <ClientOnly fallback={null}>
+    <ClientOnly fallback={<Loading />}>
       {() => (
         <main
           data-status-body
@@ -141,7 +144,7 @@ export const SingleBody: FC<{ bodyCopy: string }> = ({
   bodyCopy,
 }): JSX.Element => {
   return (
-    <ClientOnly fallback={null}>
+    <ClientOnly fallback={<Loading />}>
       {() => (
         <main
           data-status-body

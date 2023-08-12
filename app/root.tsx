@@ -1,3 +1,4 @@
+import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import {
@@ -52,6 +53,9 @@ export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
 
 export function links() {
   return [
+    ...(cssBundleHref
+      ? [{ rel: "stylesheet", href: cssBundleHref }]
+      : []),
     ...headerLinks(),
     ...navLinks(),
     ...sidebarLinks(),
