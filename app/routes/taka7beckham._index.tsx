@@ -29,7 +29,7 @@ export default function About() {
 
       <section className="out-line">
         <figure className="face">
-          <img src={face} alt="face" />
+          <img src={face} alt="face" width={96} height={96} />
         </figure>
 
         <h2>{masta.nickname}</h2>

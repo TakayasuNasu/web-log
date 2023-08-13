@@ -43,7 +43,7 @@ const Status: FC<Post> = ({
       <article>
         <Link to="/taka7beckham">
           <figure className="face">
-            <img src={face} alt="face photo" />
+            <img src={face} alt="face photo" width={46} height={46} />
           </figure>
         </Link>
 
