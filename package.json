@@ -29,6 +29,7 @@
     "react-icons": "^4.10.1",
     "react-static-tweets": "^2.0.0",
     "react-twitter-embed": "^4.0.4",
+    "remix-sitemap": "^2.2.0",
     "remix-utils": "^6.6.0",
     "static-tweets": "^2.0.0",
     "zenn-markdown-html": "^0.1.144",

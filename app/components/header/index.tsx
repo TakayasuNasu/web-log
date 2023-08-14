@@ -24,7 +24,7 @@ const Header: FC = (): JSX.Element => {
     <header data-header>
       <ul className="mobile flex md:hidden">
         <li className="face" onClick={toggle}>
-          <img src={face} alt="face" />
+          <img src={face} alt="face" width={46} height={46} />
         </li>
 
         <li className="switcher">
