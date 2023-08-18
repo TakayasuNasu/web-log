@@ -4,7 +4,7 @@ const SPACE = process.env.CONTENTFUL_SPACE_ID
 const TOKEN = process.env.CONTENTFUL_ACCESS_TOKEN
 const ENVIRONMENT = process.env.CONTENTFUL_ENVIRONMENT
 
-async function apiCall(query: string) {
+export async function apiCall(query: string) {
   const fetchUrl = `https://graphql.contentful.com/content/v1/spaces/${SPACE}/environments/${ENVIRONMENT}`
   const options = {
     method: "POST",
@@ -65,7 +65,7 @@ async function getSiteMasta() {
 
   if (!response.ok) {
     const error = new Error(
-      errors?.map((e) => e.message).join("\n") ?? "unknown"
+      errors?.map((e) => e.message).join("\n") ?? "unknown",
     )
     return Promise.reject(error)
   }
@@ -137,7 +137,7 @@ async function getHashtagBy(slug: string = "left-nav") {
 
   if (!response.ok) {
     const error = new Error(
-      errors?.map((e) => e.message).join("\n") ?? "unknown"
+      errors?.map((e) => e.message).join("\n") ?? "unknown",
     )
     return Promise.reject(error)
   }
@@ -228,7 +228,7 @@ export async function getPosts(slug?: string | null) {
 
   if (!response.ok) {
     const error = new Error(
-      errors?.map((e) => e.message).join("\n") ?? "unknown"
+      errors?.map((e) => e.message).join("\n") ?? "unknown",
     )
     return Promise.reject(error)
   }
@@ -257,7 +257,11 @@ export async function getPosts(slug?: string | null) {
     }
   })
 
-  const maped = posts.map((p, i) => ({ i, value: p.featured, date: p.publishedDate }))
+  const maped = posts.map((p, i) => ({
+    i,
+    value: p.featured,
+    date: p.publishedDate,
+  }))
 
   posts = maped
     .sort((a, b) => {
@@ -269,7 +273,7 @@ export async function getPosts(slug?: string | null) {
       if (a.value) return -1
       return 0
     })
-    .map(v => posts[v.i])
+    .map((v) => posts[v.i])
 
   if (slug) {
     return posts?.filter((post) => {

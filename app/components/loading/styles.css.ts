@@ -1,12 +1,12 @@
-import { keyframes, style } from "@vanilla-extract/css";
+import { keyframes, style } from "@vanilla-extract/css"
 
 const scaleUp = keyframes({
-  '20%': { backgroundColor: "#ffff" },
-  '40%': { transform: "scaleY(1.5)" }
-});
+  "20%": { backgroundColor: "#ffff" },
+  "40%": { transform: "scaleY(1.5)" },
+})
 
 export const loader = style({
-  alignItems: 'center',
+  alignItems: "center",
 })
 
 export const bar = style({
@@ -17,13 +17,13 @@ export const bar = style({
   animation: `${scaleUp} 1s linear infinite`,
 
   selectors: {
-    '&:nth-child(2)': {
+    "&:nth-child(2)": {
       height: "35px",
       marginInline: "5px",
       animationDelay: ".25s",
     },
 
-    '&:nth-child(3)': {
+    "&:nth-child(3)": {
       animationDelay: ".5s",
     },
   },
