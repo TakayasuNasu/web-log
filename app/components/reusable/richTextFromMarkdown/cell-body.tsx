@@ -7,9 +7,13 @@ import cx from "classnames"
 // type
 import type { Post } from "~/models/post.server"
 
+// components
+import CustomCard from "./customCard"
+
 // assets
 import face from "~/images/face.webp"
 
+// style
 import * as styles from "./styles.css"
 import contentStyle from "~/components/status/content.css"
 
@@ -36,8 +40,11 @@ const CellBody: FC<Post> = ({ bodyCopy }): JSX.Element => {
             options={{
               wrapper: "main",
               overrides: {
-                p: {
-                  component: CustomParagraph,
+                CustomContainer: {
+                  component: CustomContainer,
+                },
+                CustomCard: {
+                  component: CustomCard,
                 },
               },
             }}
@@ -52,32 +59,16 @@ const CellBody: FC<Post> = ({ bodyCopy }): JSX.Element => {
 
 export default CellBody
 
-const CustomParagraph: FC<{ children: React.ReactNode }> = ({
+const CustomContainer: FC<{ children: React.ReactNode }> = ({
   children,
   ...props
 }): JSX.Element => {
-  let isContainer = false
-
-  React.Children.map(children, (child) => {
-    if (typeof child === "string" && /^:::/.test(child)) {
-      isContainer = true
-    }
-  })
-
-  if (isContainer) {
-    return (
-      <aside className="msg message">
-        <span className="msg-symbol">!</span>
-        <div>
-          {React.Children.map(children, (child) => {
-            if (typeof child === "string") {
-              return <p>{child.replace(":::", "")}</p>
-            }
-          })}
-        </div>
-      </aside>
-    )
-  }
-
-  return <p {...props}>{children}</p>
+  return (
+    <aside {...props}>
+      <span className="msg-symbol">!</span>
+      <div className="msg-content">
+        <p>{children}</p>
+      </div>
+    </aside>
+  )
 }

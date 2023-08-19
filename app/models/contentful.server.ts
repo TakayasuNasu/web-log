@@ -184,7 +184,7 @@ type PostsResponse = {
 export async function getPosts(slug?: string | null) {
   const query = `
   {
-    postCollection {
+    postCollection(order: [featured_DESC, publishedDate_DESC]) {
       items {
         sys {
           publishedAt
@@ -233,7 +233,7 @@ export async function getPosts(slug?: string | null) {
     return Promise.reject(error)
   }
 
-  let posts = data.postCollection.items.map((post) => {
+  const posts = data.postCollection.items.map((post) => {
     const bodyCopy = markdownHtml(post.bodyCopy, {
       embedOrigin: "https://embed.zenn.studio",
     })
@@ -262,18 +262,6 @@ export async function getPosts(slug?: string | null) {
     value: p.featured,
     date: p.publishedDate,
   }))
-
-  posts = maped
-    .sort((a, b) => {
-      if (new Date(a.date) < new Date(b.date)) return 1
-      if (new Date(a.date) > new Date(b.date)) return -1
-      return 0
-    })
-    .sort((a) => {
-      if (a.value) return -1
-      return 0
-    })
-    .map((v) => posts[v.i])
 
   if (slug) {
     return posts?.filter((post) => {
