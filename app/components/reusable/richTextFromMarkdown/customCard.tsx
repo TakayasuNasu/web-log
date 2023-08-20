@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import type { FC } from "react"
+import { useFetcher } from "@remix-run/react"
 import { ClientOnly } from "remix-utils"
-import ogp from "open-graph-scraper"
 
 const CustomCard: FC<{ url?: string }> = ({ url }): JSX.Element => {
   if (!url) {
@@ -13,19 +13,36 @@ const CustomCard: FC<{ url?: string }> = ({ url }): JSX.Element => {
 
 export default CustomCard
 
-// export async function getOgpData(url: string) {
-//   const data = await ogp({ url: url, onlyGetOpenGraphInfo: true })
-
-//   if (data.error) {
-//     throw data.error
-//   }
-
-//   return data.result
-// }
-
 const Card: FC<{ url: string }> = ({ url }): JSX.Element => {
+  const fetcher = useFetcher()
   useEffect(() => {
-    console.log(12)
+    const controller = new AbortController()
+
+    const hoge = async () => {
+      let html
+      try {
+        const res = await fetch(`/loader/ogp?url=${url}`, {
+          signal: controller.signal,
+        })
+
+        html = await res.text()
+        const parser = new DOMParser()
+        const doc = parser.parseFromString(html, "text/html")
+        console.log(doc)
+        const metaElements = doc.querySelectorAll("meta")
+        metaElements.forEach((meta) => {
+          console.log({ meta })
+        })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    hoge()
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   return (
