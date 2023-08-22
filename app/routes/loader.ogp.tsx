@@ -15,5 +15,7 @@ export async function loader({ request }: LoaderArgs) {
     return json("Not found OGP", { status: res.status })
   }
 
-  return json({ data: res })
+  const hoge = await res.text()
+
+  return json({ data: hoge })
 }

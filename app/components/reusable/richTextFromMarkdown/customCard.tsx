@@ -1,7 +1,10 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import type { FC } from "react"
 import { useFetcher } from "@remix-run/react"
 import { ClientOnly } from "remix-utils"
+
+// style
+import * as styles from "./styles.css"
 
 const CustomCard: FC<{ url?: string }> = ({ url }): JSX.Element => {
   if (!url) {
@@ -14,40 +17,69 @@ const CustomCard: FC<{ url?: string }> = ({ url }): JSX.Element => {
 export default CustomCard
 
 const Card: FC<{ url: string }> = ({ url }): JSX.Element => {
+  const [title, setTitle] = useState<string | undefined>("")
+  const [description, setDescription] = useState<string | undefined>("")
+  const [img, setImg] = useState<string | undefined>("")
+  const domain = url.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)
+
   const fetcher = useFetcher()
+
   useEffect(() => {
-    const controller = new AbortController()
+    if (fetcher.state == "idle" && fetcher.data) {
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(fetcher.data.data, "text/html")
 
-    const hoge = async () => {
-      let html
+      const title = doc.querySelector("title")
+      setTitle(title?.innerHTML)
+
+      const metaElements = doc.querySelectorAll("meta")
+
+      metaElements.forEach((meta) => {
+        if (meta.hasAttribute("property")) {
+          const property = meta.getAttribute("property")
+          const content = meta.getAttribute("content")
+          if (property == "og:image" && content) {
+            setImg(content)
+          }
+
+          if (property == "og:description" && content) {
+            setDescription(content)
+          }
+        }
+      })
+    }
+  }, [fetcher])
+
+  useEffect(() => {
+    const setup = async () => {
       try {
-        const res = await fetch(`/loader/ogp?url=${url}`, {
-          signal: controller.signal,
-        })
-
-        html = await res.text()
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(html, "text/html")
-        console.log(doc)
-        const metaElements = doc.querySelectorAll("meta")
-        metaElements.forEach((meta) => {
-          console.log({ meta })
-        })
+        fetcher.load(`/loader/ogp?url=${url}`)
       } catch (error) {
         console.log(error)
       }
     }
 
-    hoge()
-
-    return () => {
-      controller.abort()
-    }
+    setup()
   }, [])
 
   return (
-    <section>
-      <span>{url}</span>
-    </section>
+    <div data-ogp-link>
+      <a href={url} target="_blank">
+        {img && (
+          <figure className="hh">
+            <img src={img} alt="card image" />
+          </figure>
+        )}
+      </a>
+
+      <div className="og-text">
+        <aside>
+          <span>{domain && domain.length > 0 && domain[1]}</span>
+        </aside>
+
+        <h2>{title}</h2>
+        <p>{description}</p>
+      </div>
+    </div>
   )
 }
