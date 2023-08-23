@@ -4,16 +4,23 @@
 [data-status-body] > * {
   margin-top: 16px;
 }
-[data-status-body] h1, [data-status-body] h2, [data-status-body] h3,
-[data-status-body] h4, [data-status-body] h5, [data-status-body] h6 {
+[data-status-body] h1,
+[data-status-body] h2,
+[data-status-body] h3,
+[data-status-body] h4,
+[data-status-body] h5,
+[data-status-body] h6 {
   font-size: var(--font-size-large);
 }
-[data-status-body] > p, [data-status-body] > ul,
-[data-status-body] > ol, [data-status-body] > code,
+[data-status-body] > p,
+[data-status-body] > ul,
+[data-status-body] > ol,
+[data-status-body] > code,
 [data-status-body] > blockquote {
   font-size: var(--font-size-medium);
 }
-[data-status-body] > p, [data-status-body] blockquote {
+[data-status-body] > p,
+[data-status-body] blockquote {
   line-height: 1.8;
 }
 [data-status-body] a {
@@ -160,12 +167,6 @@
 [data-status-body] .code-block-filename-container + pre {
   border-top-left-radius: 0;
 }
-[data-status-body] img:not(.emoji) {
-  margin: 1.5rem auto;
-  display: table;
-  max-width: 100%;
-  height: auto;
-}
 [data-status-body] img + br {
   display: none;
 }
@@ -184,7 +185,7 @@
   line-height: 1.6;
 }
 [data-status-body] aside.msg.alert {
-  color: #112D4E;
+  color: #112d4e;
   background: #ffeff2;
 }
 [data-status-body] aside.msg a {

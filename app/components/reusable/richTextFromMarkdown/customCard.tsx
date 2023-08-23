@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import type { FC } from "react"
 import { useFetcher } from "@remix-run/react"
 import { ClientOnly } from "remix-utils"
+import cx from "classnames"
 
 // style
 import * as styles from "./styles.css"
@@ -63,23 +64,27 @@ const Card: FC<{ url: string }> = ({ url }): JSX.Element => {
   }, [])
 
   return (
-    <div data-ogp-link>
-      <a href={url} target="_blank">
+    <div className={cx(styles.cardWrapper, "overflow-hidden relative")}>
+      <a
+        href={url}
+        target="_blank"
+        className={cx(styles.ogpCard, "no-underline")}
+      >
         {img && (
-          <figure className="hh">
+          <figure className="og-image">
             <img src={img} alt="card image" />
           </figure>
         )}
+
+        <div className={cx(styles.ogTextBlock, "p-3")}>
+          <aside className={cx(styles.textGray)}>
+            <span>{domain && domain.length > 0 && domain[1]}</span>
+          </aside>
+
+          <h2 className={cx(styles.textLg, "py-2")}>{title}</h2>
+          <p className={cx(styles.textGray, "leading-tight")}>{description}</p>
+        </div>
       </a>
-
-      <div className="og-text">
-        <aside>
-          <span>{domain && domain.length > 0 && domain[1]}</span>
-        </aside>
-
-        <h2>{title}</h2>
-        <p>{description}</p>
-      </div>
     </div>
   )
 }

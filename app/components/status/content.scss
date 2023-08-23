@@ -5,29 +5,35 @@
     margin-top: 16px;
   }
 
-  h1, h2, h3,
-  h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-size: var(--font-size-large);
   }
 
-  > p, > ul,
-  > ol, > code,
+  > p,
+  > ul,
+  > ol,
+  > code,
   > blockquote {
     font-size: var(--font-size-medium);
   }
 
-  > p, blockquote {
+  > p,
+  blockquote {
     line-height: 1.8;
   }
 
   a {
     color: var(--link-colour);
-  
+
     &:hover {
       text-decoration: underline;
     }
   }
-
 
   .contains-task-list {
     .task-list-item {
@@ -76,7 +82,7 @@
       }
     }
   }
-  
+
   blockquote {
     padding: 12px;
     border-radius: 4px;
@@ -85,7 +91,7 @@
     & > :first-child {
       margin-top: 0;
     }
-  
+
     & > :last-child {
       margin-bottom: 0;
     }
@@ -127,8 +133,9 @@
 
   code,
   .code-block-filename {
-    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
     -webkit-font-smoothing: antialiased;
   }
 
@@ -143,7 +150,7 @@
     word-wrap: normal;
     display: flex;
     &:after {
-      content: '';
+      content: "";
       width: 8px;
       flex-shrink: 0;
     }
@@ -167,7 +174,7 @@
       margin: 0;
     }
   }
-  
+
   .code-block-filename {
     display: table;
     max-width: 100%;
@@ -179,16 +186,9 @@
     padding: 6px 12px 20px;
     margin-bottom: -16px;
   }
-  
+
   .code-block-filename-container + pre {
     border-top-left-radius: 0;
-  }
-
-  img:not(.emoji) {
-    margin: 1.5rem auto;
-    display: table;
-    max-width: 100%;
-    height: auto;
   }
 
   img + br {
@@ -209,46 +209,46 @@
     background: var(--background-colour);
     font-size: 0.94em;
     line-height: 1.6;
-  
+
     &.alert {
-      color: #112D4E;
+      color: #112d4e;
       background: #ffeff2;
     }
-  
+
     a {
       color: inherit;
       text-decoration: underline;
     }
   }
-  
+
   .msg-symbol {
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    width: 2.0rem;
-    height: 2.0rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 99rem;
     background-color: var(--link-colour);
     color: vat(--text-colour);
   }
-  
+
   aside.msg.alert .msg-symbol {
     background-color: #ff7670;
   }
-  
+
   .msg-content {
     flex: 1;
     margin-left: 0.6em;
     min-width: 0;
-  
-    &>* {
+
+    & > * {
       margin: 0.7rem 0;
-  
+
       &:first-child {
         margin-top: 0;
       }
-  
+
       &:last-child {
         margin-bottom: 0;
       }
@@ -260,7 +260,6 @@
   cursor: auto;
 
   > p {
-
     @media (min-width: 768px) {
       font-size: clamp(16px, 18 / 1024 * 100vw, 18px);
     }
