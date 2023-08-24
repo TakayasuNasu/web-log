@@ -34,7 +34,7 @@ const CellBody: FC<Post> = ({ bodyCopy }): JSX.Element => {
           </figure>
         </Link>
 
-        <div className="body">
+        <div className="body w-full">
           <Markdown
             data-status-body
             options={{
