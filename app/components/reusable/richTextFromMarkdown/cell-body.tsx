@@ -9,6 +9,7 @@ import type { Post } from "~/models/post.server"
 
 // components
 import CustomCard from "./customCard"
+import CodeBlock from "./codeBlock"
 
 // assets
 import face from "~/images/face.webp"
@@ -45,6 +46,9 @@ const CellBody: FC<Post> = ({ bodyCopy }): JSX.Element => {
                 },
                 CustomCard: {
                   component: CustomCard,
+                },
+                pre: {
+                  component: CodeBlock,
                 },
               },
             }}
