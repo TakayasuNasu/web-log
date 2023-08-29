@@ -153,6 +153,9 @@
 [data-status-body] .code-block-container pre {
   margin: 0;
 }
+[data-status-body] .code-block-container .code-block-filename-containe + pre {
+  border-top-left-radius: 0;
+}
 [data-status-body] .code-block-filename {
   display: table;
   max-width: 100%;

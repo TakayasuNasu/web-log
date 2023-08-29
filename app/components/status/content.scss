@@ -173,6 +173,10 @@
     pre {
       margin: 0;
     }
+
+    .code-block-filename-containe + pre {
+      border-top-left-radius: 0;
+    }
   }
 
   .code-block-filename {
