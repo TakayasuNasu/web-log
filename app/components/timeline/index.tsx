@@ -1,11 +1,16 @@
-import React from "react"
 import type { FC } from "react"
+import cx from "classnames"
 
 // type
 import type { Post } from "~/models/post.server"
 
+// style
+import * as styles from "./styles.css"
+
 // components
 import Body from "./body"
+import Header from "./header"
+import SidebarLeft from "./sidebarLeft"
 
 const Timeline: FC<Post> = ({
   slug,
@@ -16,8 +21,17 @@ const Timeline: FC<Post> = ({
   const date = new Date(publishedDate)
 
   return (
-    <article data-has-reply={reply ? true : false}>
-      <Body {...{ bodyCopy }} />
+    <article
+      data-has-reply={reply ? true : false}
+      className={cx(styles.wrapper, "flex items-start overflow-hidden")}
+    >
+      <SidebarLeft />
+
+      <div className="main">
+        <Header date={date} />
+
+        <Body {...{ bodyCopy }} />
+      </div>
     </article>
   )
 }
