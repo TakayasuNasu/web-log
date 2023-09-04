@@ -1,7 +1,7 @@
 import React from "react"
 import type { FC } from "react"
-import SyntaxHighlighter from "react-syntax-highlighter"
-import { atomOneDark } from "react-syntax-highlighter/dist/cjs/styles/hljs"
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 
 const CodeBlock: FC<{ children: React.ReactElement }> = ({
   children,
@@ -17,7 +17,7 @@ const CodeBlock: FC<{ children: React.ReactElement }> = ({
           <span className="code-block-filename">{language.at(1)}</span>
         </div>
       )}
-      <SyntaxHighlighter language={language?.at(0)} style={atomOneDark}>
+      <SyntaxHighlighter language={language?.at(0)} style={oneDark}>
         {code}
       </SyntaxHighlighter>
     </div>

@@ -9,6 +9,7 @@ import * as styles from "./styles.css"
 
 // components
 import Body from "./body"
+import Footer from "./footer"
 import Header from "./header"
 import SidebarLeft from "./sidebarLeft"
 
@@ -27,10 +28,12 @@ const Timeline: FC<Post> = ({
     >
       <SidebarLeft />
 
-      <div className="main">
+      <div className="main w-full">
         <Header date={date} />
 
         <Body {...{ bodyCopy }} />
+
+        <Footer slug={slug} />
       </div>
     </article>
   )

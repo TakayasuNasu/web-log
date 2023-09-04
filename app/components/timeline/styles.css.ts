@@ -12,6 +12,7 @@ export const header = style({
 
 globalStyle(`${header} p`, {
   overflow: "hidden",
+  fontSize: "var(--font-size-small)",
   whiteSpace: "nowrap",
   textOverflow: "ellipsis",
 })
