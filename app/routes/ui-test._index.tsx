@@ -25,7 +25,7 @@ export async function loader({ request }: LoaderArgs) {
 
   return json({
     masta: await client.getSiteMasta(),
-    posts: await getPosts(),
+    posts: await getPosts(tag),
   })
 }
 

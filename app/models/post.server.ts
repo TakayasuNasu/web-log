@@ -93,5 +93,11 @@ export async function getPosts(
     return Promise.reject(error)
   }
 
+  if (slug) {
+    return data.postCollection.items.filter((post) => {
+      return post.collection.hashtags.some((tag) => tag.slug == slug)
+    })
+  }
+
   return data.postCollection.items
 }
