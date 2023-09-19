@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
@@ -14,6 +14,7 @@ import { getPosts } from "~/models/post.server"
 import { links as statusLinks } from "~/components/status"
 import Pagination, { links as paginationLinks } from "~/components/pagination"
 import Timeline from "~/components/timeline"
+import Reply from "~/components/timeline/reply"
 
 export function links() {
   return [...statusLinks(), ...paginationLinks()]
@@ -22,10 +23,12 @@ export function links() {
 export async function loader({ request }: LoaderArgs) {
   const url = new URL(request.url)
   const tag = url.searchParams.get("tag")
+  const page = url.searchParams.get("p") || 1
 
   return json({
     masta: await client.getSiteMasta(),
     posts: await getPosts(tag),
+    page: Number(page),
   })
 }
 
@@ -33,10 +36,11 @@ export default function Index() {
   const {
     masta: { perPage },
     posts,
+    page,
   } = useLoaderData<typeof loader>()
 
   const [current, setCurrent] = useState(1)
-  const offset = (current - 1) * perPage
+  const offset = (page - 1) * perPage
 
   return (
     <>
@@ -45,6 +49,7 @@ export default function Index() {
           return (
             <li key={i}>
               <Timeline {...post} />
+              {post.reply && <Reply {...post} />}
             </li>
           )
         })}

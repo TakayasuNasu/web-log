@@ -4,6 +4,22 @@ export const wrapper = style({
   paddingBlock: "12px",
   paddingInline: "16px",
   columnGap: "12px",
+  selectors: {
+    '&[data-has-reply="true"]': {
+      position: "relative",
+    },
+
+    ['&[data-has-reply="true"]:before']: {
+      content: "",
+      display: "block",
+      position: "absolute",
+      top: 20,
+      left: "min(8.2vw, 34px)",
+      width: 2,
+      height: "100%",
+      backgroundColor: "var(--border-colour)",
+    },
+  },
 })
 
 export const header = style({

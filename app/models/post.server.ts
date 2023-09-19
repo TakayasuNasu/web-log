@@ -76,6 +76,22 @@ export async function getPosts(
           slug
           publishedDate
           bodyCopy
+          reply {
+            sys {
+              publishedAt
+            }
+            slug
+            publishedDate
+            bodyCopy
+            reply {
+              sys {
+                publishedAt
+              }
+              slug
+              publishedDate
+              bodyCopy
+            }
+          }
         }
       }
     }
@@ -93,11 +109,21 @@ export async function getPosts(
     return Promise.reject(error)
   }
 
+  const replies = data.postCollection.items
+    .map((post) => {
+      return post.reply?.slug
+    })
+    .filter((slug) => slug)
+
+  const posts = data.postCollection.items.filter((post) => {
+    return !replies.includes(post.slug)
+  })
+
   if (slug) {
-    return data.postCollection.items.filter((post) => {
+    return posts.filter((post) => {
       return post.collection.hashtags.some((tag) => tag.slug == slug)
     })
   }
 
-  return data.postCollection.items
+  return posts
 }
