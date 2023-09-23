@@ -1,4 +1,3 @@
-import React, { useState } from "react"
 import type { LoaderArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
@@ -29,6 +28,7 @@ export async function loader({ request }: LoaderArgs) {
     masta: await client.getSiteMasta(),
     posts: await getPosts(tag),
     page: Number(page),
+    tag: tag,
   })
 }
 
@@ -37,9 +37,10 @@ export default function Index() {
     masta: { perPage },
     posts,
     page,
+    tag,
   } = useLoaderData<typeof loader>()
 
-  const [current, setCurrent] = useState(1)
+  const current = page
   const offset = (page - 1) * perPage
 
   return (
@@ -54,7 +55,7 @@ export default function Index() {
           )
         })}
       </ul>
-      <Pagination {...{ total: posts.length, perPage, current, setCurrent }} />
+      <Pagination {...{ total: posts.length, perPage, current, tag }} />
     </>
   )
 }

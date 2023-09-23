@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction } from "react"
 import type { FC } from "react"
+import { useNavigate } from "@remix-run/react"
 
 // styles
 import styles from "./styles.css"
@@ -10,15 +10,16 @@ interface PaginationProps {
   total: number
   perPage: number
   current: number
-  setCurrent: Dispatch<SetStateAction<number>>
+  tag?: string | null
 }
 
 const Pagination: FC<PaginationProps> = ({
   total,
   perPage,
   current,
-  setCurrent,
+  tag,
 }): JSX.Element => {
+  const navigate = useNavigate()
   const totalPages = Math.ceil(total / perPage)
 
   const pageNumbers = [...Array(totalPages)].map((_, i) => {
@@ -34,13 +35,9 @@ const Pagination: FC<PaginationProps> = ({
   })
 
   const handleClick = (num: number) => {
-    setCurrent(num)
-    if (typeof document !== "undefined") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    }
+    const tagQuery = tag ? `?tag=${tag}` : ""
+    const path = num === 1 ? `./${tagQuery}` : `./${tagQuery}&p=${num}`
+    navigate(path)
   }
 
   if (pageNumbers.length < 2) {
