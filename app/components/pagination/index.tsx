@@ -36,7 +36,9 @@ const Pagination: FC<PaginationProps> = ({
 
   const handleClick = (num: number) => {
     const tagQuery = tag ? `?tag=${tag}` : ""
-    const path = num === 1 ? `./${tagQuery}` : `./${tagQuery}&p=${num}`
+    const preQuery = tagQuery ? "&" : "?"
+    const path =
+      num === 1 ? `./${tagQuery}` : `./${tagQuery}${preQuery}p=${num}`
     navigate(path)
   }
 
