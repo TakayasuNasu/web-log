@@ -31,7 +31,7 @@ const Timeline: FC<Post> = ({
       <div className="main w-full">
         <Header date={date} />
 
-        <Body {...{ bodyCopy }} />
+        <Body {...{ slug, bodyCopy }} />
 
         <Footer slug={slug} />
       </div>

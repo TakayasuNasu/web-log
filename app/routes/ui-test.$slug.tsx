@@ -1,32 +1,31 @@
 import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
-import { Link } from "@remix-run/react"
 import { useLoaderData } from "@remix-run/react"
+import cx from "classnames"
 
 // models
-import { client } from "~/models/contentful.server"
+import { getPosts } from "~/models/post.server"
 
 // components
 import { links as statusLinks } from "~/components/status"
-import {
-  StatusHeader,
-  StatusFooter,
-  Body,
-  SingleBody,
-} from "~/components/status"
+import Body from "~/components/timeline/body"
+import Footer from "~/components/timeline/footer"
+import Header from "~/components/timeline/header"
+import SidebarLeft from "~/components/timeline/sidebarLeft"
+import Reply from "~/components/timeline/reply"
+
+// style
+import * as styles from "~/components/timeline/styles.css"
 
 // assets
 import ogImage from "~/images/ogp-vancouver.jpg"
-import face from "~/images/face.webp"
 
 export function links() {
   return [...statusLinks()]
 }
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const post = (await client.getPosts()).find(
-    (post) => post.slug == params.slug,
-  )
+  const post = (await getPosts()).find((post) => post.slug == params.slug)
 
   if (!post) {
     throw new Response("Not Found", { status: 404 })
@@ -53,61 +52,33 @@ export const meta: V2_MetaFunction<typeof loader> = ({ location, data }) => {
 }
 
 export default function PostSlug() {
+  const { post } = useLoaderData<typeof loader>()
   const {
-    post: {
-      sys: { publishedAt },
-      slug,
-      bodyCopy,
-      reply,
-    },
-  } = useLoaderData<typeof loader>()
+    sys: { publishedAt },
+    slug,
+    bodyCopy,
+    reply,
+  } = post
   const date = new Date(publishedAt)
 
   return (
-    <article data-single data-has-reply={reply ? true : false}>
-      <ul className="main-timeline flex items-start gap-x-3">
-        <li>
-          <Link to="/taka7beckham">
-            <figure className="face">
-              <img src={face} alt="face photo" width={46} height={46} />
-            </figure>
-          </Link>
-        </li>
+    <>
+      <article
+        data-has-reply={reply ? true : false}
+        className={cx(styles.wrapper, "flex items-start overflow-hidden")}
+      >
+        <SidebarLeft />
 
-        <li className="w-full min-w-0">
-          <StatusHeader date={date} />
+        <div className="main w-full">
+          <Header date={date} />
 
-          <SingleBody {...{ bodyCopy }} />
+          <Body {...{ slug, bodyCopy }} />
 
-          <StatusFooter slug={slug} />
-        </li>
-      </ul>
+          <Footer slug={slug} />
+        </div>
+      </article>
 
-      {reply &&
-        (() => {
-          const date = new Date(reply.sys.publishedAt)
-          return (
-            <div className="reply-article">
-              <figure className="face">
-                <img src={face} alt="face photo" />
-              </figure>
-
-              <ul className="wrapper">
-                <li>
-                  <StatusHeader date={date} />
-                </li>
-
-                <li>
-                  <Body {...{ bodyCopy: reply.bodyCopy, slug: reply.slug }} />
-                </li>
-
-                <li>
-                  <StatusFooter slug={reply.slug} />
-                </li>
-              </ul>
-            </div>
-          )
-        })()}
-    </article>
+      {post.reply && <Reply {...post} />}
+    </>
   )
 }
