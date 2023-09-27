@@ -18,7 +18,7 @@ const Body: FC<{ slug: string; bodyCopy: string }> = ({
     to: string,
   ) => {
     if ("localName" in e.target && e.target.localName != "img") {
-      navigate(`/ui-test/${to}`)
+      navigate(`/taka7beckham/${to}`)
     }
   }
 
