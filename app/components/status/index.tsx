@@ -1,7 +1,7 @@
 import type { FC } from "react"
 import { Link } from "@remix-run/react"
 import { useNavigate } from "@remix-run/react"
-import { ClientOnly } from "remix-utils"
+import { ClientOnly } from "remix-utils/client-only"
 
 // type
 import type { Post } from "~/models/contentful.server"
@@ -53,7 +53,6 @@ const Status: FC<Post> = ({
           <Body {...{ slug, bodyCopy }} />
 
           <StatusFooter slug={slug} />
-
         </div>
       </article>
     </div>
@@ -89,21 +88,28 @@ export const StatusHeader: FC<{ date: Date }> = ({ date }): JSX.Element => {
   )
 }
 
-export const StatusFooter: FC<{slug: string}> = ({ slug }): JSX.Element => {
-
+export const StatusFooter: FC<{ slug: string }> = ({ slug }): JSX.Element => {
   const url = `https://weblog.i-nasu.com/taka7beckham/${slug}`
-  
+
   return (
     <footer data-status-footer>
       <ul className="grid grid-cols-2 mr-auto w-1/5">
         <li>
-          <a href={`http://www.facebook.com/share.php?u=${url}`} rel="noreferrer noopener" target="_blank">
+          <a
+            href={`http://www.facebook.com/share.php?u=${url}`}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
             <BsFacebook />
           </a>
         </li>
 
         <li>
-          <a href={`https://twitter.com/share?url=${url}`} rel="noreferrer noopener" target="_blank">
+          <a
+            href={`https://twitter.com/share?url=${url}`}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
             <BsTwitter />
           </a>
         </li>
@@ -120,7 +126,7 @@ export const Body: FC<{ slug: string; bodyCopy: string }> = ({
 
   const handleClick = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
-    to: string
+    to: string,
   ) => {
     if ("localName" in e.target && e.target.localName != "img") {
       navigate(`/taka7beckham/${to}`)

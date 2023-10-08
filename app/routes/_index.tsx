@@ -1,5 +1,4 @@
-import { useState } from "react"
-import type { LoaderArgs } from "@remix-run/node"
+import type { LoaderFunctionArgs } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { client } from "~/models/contentful.server"
@@ -20,7 +19,7 @@ export function links() {
   return [...statusLinks(), ...paginationLinks()]
 }
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url)
   const tag = url.searchParams.get("tag")
   const page = url.searchParams.get("p") || 1

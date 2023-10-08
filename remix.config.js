@@ -7,6 +7,7 @@ module.exports = {
       ? "./server.js"
       : undefined,
   ignoredRouteFiles: ["**/.*"],
+  serverDependenciesToBundle: ["remix-utils/client-only"],
   serverModuleFormat: "cjs",
   future: {
     v2_normalizeFormMethod: true,
@@ -20,4 +21,4 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: ".netlify/functions-internal/server.js",
   // publicPath: "/build/",
-};
+}

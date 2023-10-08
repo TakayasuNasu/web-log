@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import type { FC } from "react"
 import { useFetcher } from "@remix-run/react"
-import { ClientOnly } from "remix-utils"
+import { ClientOnly } from "remix-utils/client-only"
 import cx from "classnames"
 
 // style
