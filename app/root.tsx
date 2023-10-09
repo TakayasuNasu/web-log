@@ -1,5 +1,5 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
+import { cssBundleHref } from "@remix-run/css-bundle"
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import {
   Links,
@@ -28,7 +28,7 @@ import Footer, { links as footerLinks } from "./components/footer"
 // style
 import styles from "~/styles/style.css"
 
-export const loader = async ({ request }: LoaderArgs) => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
   const themeSession = await getThemeSession(request)
 
   const {
@@ -42,20 +42,18 @@ export const loader = async ({ request }: LoaderArgs) => {
   })
 }
 
-export const meta: V2_MetaFunction<typeof loader> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
-    { charset: "utf-8", },
+    { charset: "utf-8" },
     { title: "History of Takayasu Nasu | weblog.i-nasu.com" },
-    { name: "description", content: data?.masta.description, },
-    { name: "viewport", content: "width=device-width,initial-scale=1", },
+    { name: "description", content: data?.masta.description },
+    { name: "viewport", content: "width=device-width,initial-scale=1" },
   ]
 }
 
 export function links() {
   return [
-    ...(cssBundleHref
-      ? [{ rel: "stylesheet", href: cssBundleHref }]
-      : []),
+    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
     ...headerLinks(),
     ...navLinks(),
     ...sidebarLinks(),

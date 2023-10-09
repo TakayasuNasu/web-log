@@ -23,7 +23,7 @@ const Card: FC<{ url: string }> = ({ url }): JSX.Element => {
   const [img, setImg] = useState<string | undefined>("")
   const domain = url.match(/^https?:\/{2,}(.*?)(?:\/|\?|#|$)/)
 
-  const fetcher = useFetcher()
+  const fetcher = useFetcher<{ data: string }>()
 
   useEffect(() => {
     if (fetcher.state == "idle" && fetcher.data) {

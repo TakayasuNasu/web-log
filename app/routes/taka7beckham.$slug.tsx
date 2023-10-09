@@ -1,4 +1,4 @@
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node"
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node"
 import { json } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import cx from "classnames"
@@ -24,7 +24,7 @@ export function links() {
   return [...statusLinks()]
 }
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params }: LoaderFunctionArgs) => {
   const post = await getSinglePost(params.slug || "")
 
   if (!post) {
@@ -34,7 +34,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ post: post })
 }
 
-export const meta: V2_MetaFunction<typeof loader> = ({ location, data }) => {
+export const meta: MetaFunction<typeof loader> = ({ location, data }) => {
   const url = `https://weblog.i-nasu.com${location.pathname}`
   const image = `https://weblog.i-nasu.com${ogImage}`
 

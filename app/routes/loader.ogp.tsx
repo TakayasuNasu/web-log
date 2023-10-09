@@ -1,7 +1,7 @@
-import type { LoaderArgs } from "@remix-run/node"
-import { json, redirect } from "@remix-run/node"
+import type { LoaderFunctionArgs } from "@remix-run/node"
+import { json } from "@remix-run/node"
 
-export async function loader({ request }: LoaderArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const path = new URL(request.url)
   const url = path.searchParams.get("url")
 
@@ -15,7 +15,7 @@ export async function loader({ request }: LoaderArgs) {
     return json("Not found OGP", { status: res.status })
   }
 
-  const hoge = await res.text()
+  const domString = await res.text()
 
-  return json({ data: hoge })
+  return json({ data: domString })
 }
